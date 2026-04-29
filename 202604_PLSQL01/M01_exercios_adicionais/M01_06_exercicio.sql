@@ -1,0 +1,37 @@
+-- ============================================================================
+-- CURSO PL/SQL ORACLE | dbasobrinho.com.br
+-- Modulo M01 - Introducao ao PL/SQL
+-- Exercicio M01_06 | Literais Numericos e Notacao Cientifica
+
+-- ============================================================================
+
+-- CONTEXTO :
+-- "Podemos usar dois tipos de literais numericos: inteiros e reais.
+--  Podemos, ainda, representa-los usando notacao cientifica."
+-- "A letra E utilizada na notacao cientifica indica o expoente de 10
+--  que sera usado para multiplicar o numero que aparece antes da letra."
+--
+-- PERGUNTA:
+-- Calcule os valores resultantes das atribuicoes abaixo e escreva
+-- o que sera exibido pelo DBMS_OUTPUT.PUT_LINE.
+--
+--   DECLARE
+--      v_a   NUMBER := 12E3;
+--      v_b   NUMBER := 500e-4;
+--      v_c   NUMBER := -05.32;
+--      v_d   NUMBER := 17.;
+--   BEGIN
+--      DBMS_OUTPUT.PUT_LINE('a = ' || v_a);
+--      DBMS_OUTPUT.PUT_LINE('b = ' || v_b);
+--      DBMS_OUTPUT.PUT_LINE('c = ' || v_c);
+--      DBMS_OUTPUT.PUT_LINE('d = ' || v_d);
+--   END;
+--   /
+--
+-- Resultado esperado:
+--   a = ____
+--   b = ____
+--   c = ____
+--   d = ____
+--
+-- ============================================================================

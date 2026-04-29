@@ -1,0 +1,40 @@
+-- ============================================================================
+-- CURSO PL/SQL ORACLE | dbasobrinho.com.br
+-- Modulo M01 - Introducao ao PL/SQL
+-- Exercicio M01_10 | Arquitetura: Ferramentas com e sem modulo PL/SQL
+
+-- ============================================================================
+
+-- CONTEXTO :
+-- "A PL/SQL nao e um produto independente; podemos considera-la um
+--  modulo executor de blocos e subprogramas. Esse modulo pode ser
+--  instalado no Oracle Server e nas ferramentas de desenvolvimento
+--  da Oracle (Forms Builder, Report Builder, etc.)."
+--
+-- "Em ferramentas que possuem esse modulo embutido, a ferramenta
+--  passa para seu modulo executor local o bloco de PL/SQL que pode
+--  ser processado no proprio ambiente, com a excecao dos comandos
+--  de SQL encontrados."
+--
+-- "Em ferramentas que nao tem esse modulo embutido, tais como
+--  SQL*Plus e Enterprise Manager, torna-se necessario o envio de
+--  todo o bloco para o servidor."
+--
+-- PERGUNTA:
+-- Um desenvolvedor executa um bloco PL/SQL no Forms Builder
+-- (que possui modulo PL/SQL embutido). O bloco contem:
+--   - 3 calculos com variaveis locais
+--   - 1 SELECT no banco de dados
+--   - 1 UPDATE no banco de dados
+--
+-- Quais operacoes sao processadas LOCALMENTE (no Forms Builder)
+-- e quais precisam ser enviadas ao Oracle Server?
+--
+-- ============================================================================
+
+-- Escreva sua resposta aqui:
+-- Processado localmente:
+-- ...
+--
+-- Enviado ao Oracle Server:
+-- ...

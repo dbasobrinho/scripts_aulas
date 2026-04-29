@@ -1,0 +1,29 @@
+-- ============================================================================
+-- CURSO PL/SQL ORACLE | dbasobrinho.com.br
+-- Modulo M01 - Introducao ao PL/SQL
+-- Gabarito M01_10 | Arquitetura: Ferramentas com e sem modulo PL/SQL
+
+-- ============================================================================
+
+-- RESPOSTA:
+-- Processado LOCALMENTE (no modulo PL/SQL do Forms Builder):
+--   - Os 3 calculos com variaveis locais (sao comandos PL/SQL puros)
+--
+-- Enviado ao Oracle Server:
+--   - O SELECT (comando SQL, deve ser resolvido pelo Oracle Server)
+--   - O UPDATE (comando SQL, deve ser resolvido pelo Oracle Server)
+--
+-- EXPLICACAO:
+-- Definicao Oracle:
+-- "Em ferramentas que possuem esse modulo embutido, a ferramenta
+--  passa para seu modulo executor local o bloco de PL/SQL que pode
+--  ser processado no proprio ambiente, com a excecao dos comandos
+--  de SQL encontrados. Grande parte do trabalho e realizada localmente,
+--  sem necessidade de envio de informacoes para o ambiente servidor."
+--
+-- O modulo PL/SQL local processa tudo que for PL/SQL puro.
+-- Apenas os comandos de SQL precisam ir ao Oracle Server.
+-- Isso reduz a comunicacao com o servidor.
+--
+-- Em SQL*Plus (sem modulo local):
+-- Todo o bloco vai para o servidor, que processa tudo.

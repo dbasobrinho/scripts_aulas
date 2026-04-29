@@ -1,0 +1,41 @@
+-- ============================================================================
+-- CURSO PL/SQL ORACLE | dbasobrinho.com.br
+-- Modulo M01 - Introducao ao PL/SQL
+-- Exercicio M01_07 | Comentarios em PL/SQL
+
+-- ============================================================================
+
+-- CONTEXTO :
+-- "Um comentario em PL/SQL pode ser informado de duas formas:
+--  - Dois hifens em qualquer ponto da linha torna o restante dela comentario.
+--  - /* (inicio) e */ (fim) marcam uma regiao que sera ignorada pelo compilador."
+-- "nao podemos embutir um comentario em outro"
+-- PERGUNTA:
+-- Qual dos blocos abaixo contem um uso INCORRETO de comentario?
+-- Opcao 1:
+--   BEGIN
+--      -- linha inteira comentada
+--      DBMS_OUTPUT.PUT_LINE('teste'); -- comentario no final
+--   END;
+--   /
+-- Opcao 2:
+--   BEGIN
+--      /* comentario /* aninhado */ ainda comentado */
+--      NULL;
+--   END;
+--   /
+-- Opcao 3:
+--   DECLARE
+--      v_x NUMBER := /* valor inicial */ 10;
+--   BEGIN
+--      NULL;
+--   END;
+--   /
+--   A) Opcao 1 esta incorreta.
+--   B) Opcao 2 esta incorreta (comentario aninhado nao e permitido).
+--   C) Opcao 3 esta incorreta (/* */ nao pode ser usado em DECLARE).
+--   D) Todas estao corretas.
+-- ============================================================================
+
+-- Escreva sua resposta aqui:
+-- Resposta: ___

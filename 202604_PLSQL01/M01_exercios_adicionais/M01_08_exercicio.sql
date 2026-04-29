@@ -1,0 +1,35 @@
+-- ============================================================================
+-- CURSO PL/SQL ORACLE | dbasobrinho.com.br
+-- Modulo M01 - Introducao ao PL/SQL
+-- Exercicio M01_08 | Fim de Linha e a Barra (/) no SQL*Plus
+
+-- ============================================================================
+
+-- CONTEXTO :
+-- "A indicacao de fim de linha de comando em PL/SQL e feita com um
+--  ponto-e-virgula (;). Observe que o comportamento do SQL*Plus mudara
+--  quando encontrar o primeiro comando de PL/SQL, pois nao aguardara
+--  mais o ponto-e-virgula (;) para indicacao de fim de comando.
+--  Para concluirmos a digitacao de um programa, deveremos utilizar a
+--  barra (/) para encerrar e executar, ou o ponto (.) para encerrar
+--  sem executar."
+--
+-- PERGUNTA:
+-- Um aluno digitou o seguinte no SQL*Plus e ficou aguardando:
+--
+--   SQL> BEGIN
+--     2     DBMS_OUTPUT.PUT_LINE('Ola mundo');
+--     3  END;
+--     4
+--
+-- O cursor parou na linha 4 e nada aconteceu. Por que?
+-- O que o aluno deve digitar para executar o bloco?
+--
+-- ============================================================================
+
+-- Escreva sua resposta aqui:
+-- Por que travou:
+-- ...
+--
+-- O que digitar:
+-- ...
