@@ -12,9 +12,10 @@
 -- ============================================================================
 
 SET SERVEROUTPUT ON
+SET VERIFY OFF
 
 -- ----------------------------------------------------------------------------
--- Bloco completo usando conceitos do M01
+-- PARTE 1: Bloco com valores fixos (hardcoded)
 -- ----------------------------------------------------------------------------
 DECLARE
    -- variaveis com literais numericos e string 
@@ -52,7 +53,42 @@ BEGIN
 
 EXCEPTION
    WHEN OTHERS THEN
-      -- parte de tratamento de erros 
+      -- parte de tratamento de erros
       DBMS_OUTPUT.PUT_LINE('Erro capturado: ' || SQLERRM);
+END;
+/
+
+
+-- ----------------------------------------------------------------------------
+-- PARTE 2: Mesmo bloco com & — o usuario informa os valores na execucao
+-- ----------------------------------------------------------------------------
+-- Ao executar no SQL*Plus, sera solicitado:
+--   "Enter value for seu_nome:"
+--   "Enter value for sua_versao:"
+-- O SQL*Plus substitui &variavel ANTES de enviar o bloco ao Oracle.
+-- ----------------------------------------------------------------------------
+
+PROMPT
+PROMPT === AGORA COM VARIAVEL DE SUBSTITUICAO (&) ===
+PROMPT
+
+ACCEPT v_nome_aluno  CHAR    PROMPT 'Seu nome: '
+ACCEPT v_versao_db   CHAR    DEFAULT 'Oracle 19c' PROMPT 'Versao do banco [Oracle 19c]: '
+
+DECLARE
+   v_linguagem    VARCHAR2(30)  := 'PL/SQL';
+   v_versao       VARCHAR2(30)  := '&v_versao_db';
+   v_nome         VARCHAR2(50)  := '&v_nome_aluno';
+   v_msg_saida    VARCHAR2(200);
+BEGIN
+   v_msg_saida := 'Ola, ' || v_nome || '! Bem-vindo ao curso de '
+                  || v_linguagem || ' - ' || v_versao || '.';
+
+   DBMS_OUTPUT.PUT_LINE(v_msg_saida);
+   DBMS_OUTPUT.PUT_LINE('Bloco com substituicao executado com sucesso!');
+
+EXCEPTION
+   WHEN OTHERS THEN
+      DBMS_OUTPUT.PUT_LINE('Erro: ' || SQLERRM);
 END;
 /
