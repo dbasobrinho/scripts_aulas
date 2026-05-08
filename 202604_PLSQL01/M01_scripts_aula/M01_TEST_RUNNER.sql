@@ -107,12 +107,14 @@ PAUSE Pressione ENTER para o ultimo script...
 -- ============================================================
 PROMPT
 PROMPT ============================================================
-PROMPT   [8/8]  A01_08_performance_1bloco.sql
+PROMPT   [8/8]  A01_08_performance_1bloco_USER_SCOTT.sql  (requer schema SCOTT)
 PROMPT ============================================================
 PROMPT
+ALTER SESSION SET CURRENT_SCHEMA = SCOTT;
 SET ECHO ON
-@@A01_08_performance_1bloco.sql
+@@A01_08_performance_1bloco_USER_SCOTT.sql
 SET ECHO OFF
+ALTER SESSION SET CURRENT_SCHEMA = SYS;
 
 PROMPT
 PROMPT ============================================================

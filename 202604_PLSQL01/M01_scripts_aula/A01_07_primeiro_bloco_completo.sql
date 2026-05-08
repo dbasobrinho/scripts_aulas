@@ -69,7 +69,7 @@ END;
 -- ----------------------------------------------------------------------------
 
 PROMPT
-PROMPT === AGORA COM VARIAVEL DE SUBSTITUICAO (&) ===
+PROMPT === AGORA COM VARIAVEL DE SUBSTITUICAO ===
 PROMPT
 
 ACCEPT v_nome_aluno  CHAR    PROMPT 'Seu nome: '
