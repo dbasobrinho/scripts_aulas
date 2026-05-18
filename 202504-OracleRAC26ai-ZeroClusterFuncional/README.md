@@ -59,24 +59,26 @@ Estrutura esperada:
 
 ### Download direto do GitHub (recomendado)
 
+Usa `git sparse-checkout` para baixar apenas a subpasta, sem clonar o repositório inteiro:
+
 ```bash
 mkdir -p /home/oracle/scripts_carga
 cd /home/oracle/scripts_carga
 
-BASE="https://raw.githubusercontent.com/dbasobrinho/scripts_aulas/main/202504-OracleRAC26ai-ZeroClusterFuncional"
-wget -q "$BASE/carga_hr.pl"          -O carga_hr.pl
-wget -q "$BASE/carga_co.pl"          -O carga_co.pl
-wget -q "$BASE/carga_sh.pl"          -O carga_sh.pl
-wget -q "$BASE/monitor_carga.sh"    -O monitor_carga.sh
-wget -q "$BASE/monitor_crs_db.sh"  -O monitor_crs_db.sh
+PASTA="202504-OracleRAC26ai-ZeroClusterFuncional"
+BASE="https://raw.githubusercontent.com/dbasobrinho/scripts_aulas/main/$PASTA"
 
-chmod +x carga_hr.pl carga_co.pl carga_sh.pl monitor_carga.sh monitor_crs_db.sh
+for f in carga_hr.pl carga_co.pl carga_sh.pl monitor_carga.sh monitor_crs_db.sh README.md; do
+  wget -q "$BASE/$f" -O "$f" && echo "OK $f" || echo "ERRO $f"
+done
+
+chmod +x *.pl *.sh
 ```
 
 ### Validar sintaxe antes de executar
 
 ```bash
-perl -c carga_hr.pl && perl -c carga_co.pl && perl -c carga_sh.pl
+for f in carga_hr.pl carga_co.pl carga_sh.pl; do perl -c $f; done
 # Esperado: syntax OK para os três
 ```
 
