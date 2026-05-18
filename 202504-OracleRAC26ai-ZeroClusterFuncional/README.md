@@ -19,12 +19,13 @@ simulando workload real de aplicação para demonstração de balanceamento, fai
 
 ## Scripts
 
-| Arquivo                  | Linguagem | Finalidade                                                   |
-|--------------------------|-----------|--------------------------------------------------------------|
-| `carga_hr.pl`            | Perl      | Carga contínua via SRV_HR (Active/Active)                    |
-| `carga_co.pl`            | Perl      | Carga contínua via SRV_CO (Active/Active)                    |
-| `carga_sh.pl`            | Perl      | Carga contínua via SRV_SH (Singleton CORP1)                  |
-| `carga_monitora.sh`    | Bash      | Monitoramento em tempo real dos alert logs (CRS + instâncias)|
+| Arquivo                 | Linguagem | Finalidade                                                          |
+|-------------------------|-----------|---------------------------------------------------------------------|
+| `carga_hr.pl`           | Perl      | Carga contínua via SRV_HR (Active/Active)                           |
+| `carga_co.pl`           | Perl      | Carga contínua via SRV_CO (Active/Active)                           |
+| `carga_sh.pl`           | Perl      | Carga contínua via SRV_SH (Singleton CORP1)                         |
+| `monitor_carga.sh`     | Bash      | Monitor de carga: status dos services + última linha de cada log    |
+| `monitor_crs_db.sh`   | Bash      | Alert logs em tempo real: CRS (Clusterware) + instâncias de banco   |
 
 ### Scripts de carga Perl
 
@@ -63,12 +64,13 @@ mkdir -p /home/oracle/scripts_carga
 cd /home/oracle/scripts_carga
 
 BASE="https://raw.githubusercontent.com/dbasobrinho/scripts_aulas/main/202504-OracleRAC26ai-ZeroClusterFuncional"
-wget -q "$BASE/carga_hr.pl"         -O carga_hr.pl
-wget -q "$BASE/carga_co.pl"         -O carga_co.pl
-wget -q "$BASE/carga_sh.pl"         -O carga_sh.pl
-wget -q "$BASE/carga_monitora.sh" -O carga_monitora.sh
+wget -q "$BASE/carga_hr.pl"          -O carga_hr.pl
+wget -q "$BASE/carga_co.pl"          -O carga_co.pl
+wget -q "$BASE/carga_sh.pl"          -O carga_sh.pl
+wget -q "$BASE/monitor_carga.sh"    -O monitor_carga.sh
+wget -q "$BASE/monitor_crs_db.sh"  -O monitor_crs_db.sh
 
-chmod +x carga_hr.pl carga_co.pl carga_sh.pl carga_monitora.sh
+chmod +x carga_hr.pl carga_co.pl carga_sh.pl monitor_carga.sh monitor_crs_db.sh
 ```
 
 ### Validar sintaxe antes de executar
@@ -205,41 +207,68 @@ Se o service estiver configurado com **TAF SELECT** (`srvctl modify service -db 
 
 ---
 
-## carga_monitora.sh — Alert Logs em Tempo Real
+## monitor_carga.sh — Monitor de Carga em Tempo Real
+
+Exibe a cada 2 segundos o status de cada service e a última linha do log de cada
+script de carga ativo. Ideal para acompanhar a distribuição de conexões entre
+CORP1 e CORP2 e confirmar que os scripts estão rodando.
+
+### Como executar
+
+Abrir um terminal dedicado:
+
+```bash
+bash /home/oracle/scripts_carga/monitor_carga.sh
+```
+
+### Saída esperada
+
+```
+============================================================
+=== CARGA RAC - 2026-05-18 10:15:42 ===
+======= HR (SRV_HR) =======
+  status  : O serviço SRV_HR está em execução nas instâncias CORP1,CORP2
+  failover: Tipo de failover: NONE Método de failover: NONE ...
+/tmp/carga_hr_101500_412.log | [10:15:40] SRV_HR | iter=6639 | sql=3 | rows=55 | inst=CORP2
+======= CO (SRV_CO) =======
+  status  : O serviço SRV_CO está em execução nas instâncias CORP1,CORP2
+/tmp/carga_co_101500_271.log | [10:15:39] SRV_CO | iter=2810 | sql=1 | rows=105 | inst=CORP1
+======= SH (SRV_SH) =======
+  status  : O serviço SRV_SH está em execução nas instâncias CORP1
+/tmp/carga_sh_101500_639.log | [10:15:40] SRV_SH | iter=4122 | sql=1 | rows=28 | inst=CORP1
+```
+
+---
+
+## monitor_crs_db.sh — Alert Logs CRS e Banco em Tempo Real
 
 Exibe as últimas 25 linhas dos alert logs do **CRS** e de cada **instância de banco**,
 atualizando a cada 3 segundos com `clear`. Ideal para observar eventos durante os
 cenários de falha (interconnect down, shutdown abort, poweroff).
-
-### Onde salvar
-
-```
-/home/oracle/scripts_carga/carga_monitora.sh
-```
 
 ### Como executar
 
 Abrir um terminal dedicado (não misturar com a carga):
 
 ```bash
-bash /home/oracle/scripts_carga/carga_monitora.sh
+bash /home/oracle/scripts_carga/monitor_crs_db.sh
 ```
 
 ### O que monitorar
 
-| Log                                                          | O que aparece                                    |
-|--------------------------------------------------------------|--------------------------------------------------|
-| `/u01/app/grid/diag/crs/lnxrac0*/crs/trace/alert.log`       | Eventos do Clusterware: eviction, VIP failover, CSS heartbeat |
-| `/u02/app/oracle/diag/rdbms/corp/CORP*/trace/alert_CORP*.log`| Eventos do banco: crash recovery, ORA-29740, instance startup |
+| Log                                                           | O que aparece                                              |
+|---------------------------------------------------------------|------------------------------------------------------------|
+| `/u01/app/grid/diag/crs/lnxrac0*/crs/trace/alert.log`        | Eventos do Clusterware: eviction, VIP failover, CSS heartbeat |
+| `/u02/app/oracle/diag/rdbms/corp/CORP*/trace/alert_CORP*.log` | Eventos do banco: crash recovery, ORA-29740, instance startup |
 
 ### Saída esperada durante falha
 
 ```
 === ALERT LOGS - 2026-05-18 10:22:05 ===
---- alert.log ---
+--- [CRS] - Grid Infrastructure / Clusterware ---
 ... CSS: Node lnxrac02 is not responding ...
 ... Evicting node 2 from the cluster ...
---- alert_CORP1.log ---
+--- [DB]  - Oracle Database Instance ---
 ... ORA-29740: evicted by member 2 ...
 ... Instance Recovery started ...
 ```
