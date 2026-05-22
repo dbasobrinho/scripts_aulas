@@ -1,0 +1,62 @@
+-- ============================================================
+-- CURSO PL/SQL ORACLE | dbasobrinho.com.br
+-- Modulo M02 - Fundamentos da Linguagem
+-- Exercicio M02_10 | Declaracao: "A, B NUMBER" Causa Erro
+-- ============================================================
+--
+-- ENUNCIADO:
+-- A declaracao de variaveis em PL/SQL deve ser feita de forma
+-- unitaria. Nao podemos declarar, de uma vez, diversas variaveis
+-- referentes a um mesmo tipo. Isso e diferente de algumas
+-- linguagens como C, onde "int a, b, c;" e valido.
+--
+-- Analise os blocos abaixo (baseado na Listagem 3.24):
+--
+-- BLOCO 1:
+-- DECLARE
+--   A, B, C NUMBER;
+-- BEGIN
+--   A := 0;
+-- END;
+-- /
+--
+-- BLOCO 2:
+-- DECLARE
+--   A NUMBER;
+--   B NUMBER;
+--   C NUMBER;
+-- BEGIN
+--   A := 0;
+--   B := 0;
+--   C := 0;
+-- END;
+-- /
+--
+-- BLOCO 3:
+-- DECLARE
+--   A NUMBER := 1;
+--   B NUMBER := A + 1;
+-- BEGIN
+--   DBMS_OUTPUT.PUT_LINE(B);
+-- END;
+-- /
+--
+-- PERGUNTA 1: Qual(is) bloco(s) executa(m) com sucesso?
+-- A) Apenas o Bloco 1
+-- B) Apenas o Bloco 2
+-- C) Blocos 2 e 3
+-- D) Todos os blocos
+--
+-- Resposta: ___
+--
+-- PERGUNTA 2: Qual o erro gerado pelo Bloco 1?
+-- A) ORA-00942: tabela ou view nao existe
+-- B) PLS-00103: Encontrado o simbolo ","
+-- C) PLS-00201: identificador deve ser declarado
+-- D) ORA-06502: precisao numerica grande demais
+--
+-- Resposta: ___
+--
+-- PERGUNTA 3: O Bloco 3 e valido? O que ele imprime?
+-- Resposta: ___ / Imprime: ___
+-- ============================================================

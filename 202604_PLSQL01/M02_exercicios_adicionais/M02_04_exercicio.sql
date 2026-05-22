@@ -1,0 +1,43 @@
+-- ============================================================
+-- CURSO PL/SQL ORACLE | dbasobrinho.com.br
+-- Modulo M02 - Fundamentos da Linguagem
+-- Exercicio M02_04 | Literais Numericos e Notacao Cientifica
+-- ============================================================
+--
+-- ENUNCIADO:
+-- Podemos usar dois tipos de literais numericos: inteiros e reais.
+-- Podemos ainda representa-los usando notacao cientifica.
+-- A letra E indica o expoente de 10 que sera usado para
+-- multiplicar o numero que aparece antes da letra.
+-- Exemplos: 12E3 = 12 * 10^3 = 12000
+--           500e-4 = 500 * 10^-4 = 0.05
+--
+-- Analise as atribuicoes abaixo:
+--
+-- DECLARE
+--   V_A NUMBER := 2E3;
+--   V_B NUMBER := 5e-2;
+--   V_C NUMBER := 15E0;
+--   V_D NUMBER := 1E2 + 5;
+-- BEGIN
+--   DBMS_OUTPUT.PUT_LINE(V_A);
+--   DBMS_OUTPUT.PUT_LINE(V_B);
+--   DBMS_OUTPUT.PUT_LINE(V_C);
+--   DBMS_OUTPUT.PUT_LINE(V_D);
+-- END;
+-- /
+--
+-- PERGUNTA: Qual a saida correta do bloco acima?
+-- A) 2000 / 0.05 / 15 / 105
+-- B) 2000 / 0.5  / 15 / 15
+-- C) 200  / 0.05 / 15 / 105
+-- D) 2000 / 0.05 / 1  / 105
+--
+-- Resposta: ___
+--
+-- Calcule manualmente cada valor abaixo:
+-- V_A = 2E3   = ___________
+-- V_B = 5e-2  = ___________
+-- V_C = 15E0  = ___________
+-- V_D = 1E2+5 = ___________
+-- ============================================================

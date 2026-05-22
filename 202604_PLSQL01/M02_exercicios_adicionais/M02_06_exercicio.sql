@@ -1,0 +1,61 @@
+-- ============================================================
+-- CURSO PL/SQL ORACLE | dbasobrinho.com.br
+-- Modulo M02 - Fundamentos da Linguagem
+-- Exercicio M02_06 | Comentarios e Restricoes de Aninhamento
+-- ============================================================
+--
+-- ENUNCIADO:
+-- Em PL/SQL, comentarios podem ser de linha (--) ou de bloco
+-- (/* ... */). Existe uma restricao importante: nao podemos
+-- embutir um comentario dentro de outro (nao sao aninhados).
+-- Alem disso, o comentario de linha (--)  nao deve ser usado
+-- em blocos processados dinamicamente.
+--
+-- Analise os trechos abaixo e identifique qual causa problema:
+--
+-- TRECHO A:
+-- DECLARE
+--   V_X NUMBER := 10; -- valor inicial
+-- BEGIN
+--   NULL;
+-- END;
+-- /
+--
+-- TRECHO B:
+-- DECLARE
+--   V_X NUMBER := /* valor /* aninhado */ */ 10;
+-- BEGIN
+--   NULL;
+-- END;
+-- /
+--
+-- TRECHO C:
+-- DECLARE
+--   V_X NUMBER := 10;
+-- BEGIN
+--   -- comentario de linha simples
+--   NULL;
+-- END;
+-- /
+--
+-- TRECHO D:
+-- DECLARE
+--   V_X NUMBER := /* inicio do comentario
+--                    continua na proxima linha */ 10;
+-- BEGIN
+--   NULL;
+-- END;
+-- /
+--
+-- PERGUNTA: Qual trecho causa problema de compilacao?
+-- A) Trecho A
+-- B) Trecho B
+-- C) Trecho C
+-- D) Trecho D
+--
+-- Resposta: ___
+--
+-- JUSTIFICATIVA (escreva abaixo):
+-- _______________________________________________________________
+-- _______________________________________________________________
+-- ============================================================

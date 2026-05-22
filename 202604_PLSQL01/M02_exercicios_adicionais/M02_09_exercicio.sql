@@ -1,0 +1,47 @@
+-- ============================================================
+-- CURSO PL/SQL ORACLE | dbasobrinho.com.br
+-- Modulo M02 - Fundamentos da Linguagem
+-- Exercicio M02_09 | Escopo: Variavel Visivel em Bloco Aninhado
+-- ============================================================
+--
+-- ENUNCIADO:
+-- Uma variavel declarada em um bloco e visivel nesse e em todos
+-- os blocos subordinados a ele. Uma variavel declarada em um
+-- sub-bloco deixa de existir quando o sub-bloco termina.
+-- Se uma variavel e redefinida no sub-bloco, qualquer referencia
+-- nao qualificada acessa a variavel de nivel mais interno.
+--
+-- Analise o bloco abaixo (baseado na Listagem 3.20):
+--
+-- VARIABLE MSG VARCHAR2(200)
+-- DECLARE
+--   WNUM   NUMBER       := 12;
+--   WCHAR  VARCHAR2(20) := 'WCHAR EXTERNA';
+--   WUNICO NUMBER       := 5;
+-- BEGIN
+--   DECLARE
+--     WNUM   NUMBER       := 10;
+--     WCHAR  VARCHAR2(20) := 'WCHAR INTERNA';
+--     WTOTAL NUMBER;
+--   BEGIN
+--     WTOTAL := WNUM + WUNICO;
+--     :MSG   := WCHAR || '-' || WTOTAL;
+--   END;
+-- END;
+-- /
+-- PRINT MSG
+--
+-- PERGUNTA: Qual e o valor de :MSG apos a execucao?
+-- A) WCHAR EXTERNA-17
+-- B) WCHAR INTERNA-15
+-- C) WCHAR EXTERNA-15
+-- D) WCHAR INTERNA-17
+--
+-- Resposta: ___
+--
+-- JUSTIFICATIVA (mostre os calculos):
+-- WNUM  usado no sub-bloco = ___  (local ou externo?)
+-- WUNICO usado no sub-bloco = ___ (local ou externo?)
+-- WTOTAL = WNUM + WUNICO    = ___
+-- WCHAR  usado no sub-bloco = "_______________"
+-- ============================================================

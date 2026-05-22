@@ -1,0 +1,38 @@
+-- ============================================================
+-- CURSO PL/SQL ORACLE | dbasobrinho.com.br
+-- Modulo M02 - Fundamentos da Linguagem
+-- Exercicio M02_07 | Tipos Escalares: BINARY_INTEGER vs NUMBER
+-- ============================================================
+--
+-- ENUNCIADO:
+-- PLS_INTEGER e similar ao tipo BINARY_INTEGER, porem e mais
+-- rapido para efetuar calculos pois utiliza machine arithmetic,
+-- enquanto BINARY_INTEGER e NUMBER usam library arithmetic.
+-- Uma diferenca importante: PLS_INTEGER detecta overflow mesmo
+-- que a area receptora seja um NUMBER. BINARY_INTEGER nao gera
+-- erro nessa situacao.
+--
+-- Analise o bloco abaixo (baseado na Listagem 3.08):
+--
+-- DECLARE
+--   WNUM  NUMBER;
+--   WPLS  PLS_INTEGER    := 2147483647;
+--   WBIN  BINARY_INTEGER := 2147483647;
+-- BEGIN
+--   WNUM := WBIN + 1;  -- linha A
+--   WNUM := WPLS + 1;  -- linha B
+-- END;
+-- /
+--
+-- PERGUNTA: O que ocorre na execucao do bloco?
+-- A) Ambas as linhas executam com sucesso; WNUM recebe 2147483648
+-- B) Linha A gera overflow; linha B executa com sucesso
+-- C) Linha A executa com sucesso; linha B gera erro de overflow
+-- D) Ambas as linhas geram erro de overflow
+--
+-- Resposta: ___
+--
+-- JUSTIFICATIVA (escreva abaixo):
+-- _______________________________________________________________
+-- _______________________________________________________________
+-- ============================================================

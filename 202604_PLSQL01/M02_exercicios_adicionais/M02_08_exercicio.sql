@@ -1,0 +1,40 @@
+-- ============================================================
+-- CURSO PL/SQL ORACLE | dbasobrinho.com.br
+-- Modulo M02 - Fundamentos da Linguagem
+-- Exercicio M02_08 | Atributo %TYPE: Vantagens e Comportamento
+-- ============================================================
+--
+-- ENUNCIADO:
+-- O atributo %TYPE copia o tipo de dado de uma variavel ou
+-- coluna do banco de dados. Isso favorece a independencia de
+-- dados: nao precisamos saber exatamente o tipo da coluna e,
+-- caso haja modificacoes no objeto original, a variavel se
+-- adapta automaticamente.
+--
+-- Regra importante sobre NOT NULL:
+-- - Quando baseada em variavel LOCAL: copia tipo, tamanho E NOT NULL
+-- - Quando baseada em COLUNA do banco: copia apenas tipo e tamanho
+--   (a restricao NOT NULL da coluna NAO e copiada)
+--
+-- Analise o bloco abaixo:
+--
+-- DECLARE
+--   V_BASE DATE NOT NULL := SYSDATE;
+--   W_VAR  V_BASE%TYPE;
+-- BEGIN
+--   W_VAR := NULL;
+-- END;
+-- /
+--
+-- PERGUNTA: O que ocorre quando o bloco e executado?
+-- A) Executa com sucesso; W_VAR recebe NULL
+-- B) Erro em tempo de compilacao: NOT NULL foi copiado de V_BASE
+-- C) Executa com sucesso; W_VAR fica com o valor de SYSDATE
+-- D) Erro em tempo de execucao: conversao invalida de NULL para DATE
+--
+-- Resposta: ___
+--
+-- BONUS: Se W_VAR fosse declarado como FUNC.DT_ADMISSAO%TYPE
+-- e DT_ADMISSAO for NOT NULL no banco, W_VAR poderia receber NULL?
+-- Resposta: ___  Motivo: ____________________________________
+-- ============================================================

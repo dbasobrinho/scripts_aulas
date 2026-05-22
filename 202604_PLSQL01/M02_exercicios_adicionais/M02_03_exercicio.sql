@@ -1,0 +1,42 @@
+-- ============================================================
+-- CURSO PL/SQL ORACLE | dbasobrinho.com.br
+-- Modulo M02 - Fundamentos da Linguagem
+-- Exercicio M02_03 | Palavras Reservadas
+-- ============================================================
+--
+-- ENUNCIADO:
+-- Alguns identificadores possuem um significado especial em
+-- PL/SQL e nao devem ser utilizados na declaracao de variaveis.
+-- O uso de END como parte do nome (ex: END_CASA) nao causa
+-- problemas. Somente o uso exato da palavra reservada como
+-- identificador gera erro.
+--
+-- Analise os identificadores abaixo. Qual deles causaria erro
+-- de compilacao se usado como nome de variavel SEM aspas duplas?
+--
+-- DECLARE
+--   END_DATE    DATE;          -- (A)
+--   V_BEGIN     NUMBER;        -- (B)
+--   LOOP_COUNT  NUMBER;        -- (C)
+--   IF          VARCHAR2(10);  -- (D)
+-- BEGIN
+--   NULL;
+-- END;
+-- /
+--
+-- PERGUNTA: Quais declaracoes causam erro de compilacao?
+-- A) Apenas END_DATE
+-- B) Apenas IF
+-- C) IF e LOOP_COUNT
+-- D) IF e V_BEGIN
+--
+-- Resposta: ___
+--
+-- JUSTIFICATIVA (escreva abaixo):
+-- _______________________________________________________________
+-- _______________________________________________________________
+--
+-- BONUS: Como corrigir a declaracao problematica sem renomear?
+-- Escreva abaixo:
+-- _______________________________________________________________
+-- ============================================================

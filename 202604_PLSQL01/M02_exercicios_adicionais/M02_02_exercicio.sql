@@ -1,0 +1,39 @@
+-- ============================================================
+-- CURSO PL/SQL ORACLE | dbasobrinho.com.br
+-- Modulo M02 - Fundamentos da Linguagem
+-- Exercicio M02_02 | Identificadores com Aspas Duplas
+-- ============================================================
+--
+-- ENUNCIADO:
+-- Opcionalmente, os identificadores podem ser declarados e
+-- usados entre aspas duplas. Com essa sintaxe e possivel
+-- declarar variaveis com espacos e caracteres especiais.
+-- POREM: o uso passa a ser sensivel a maiusculas e minusculas.
+--
+-- Analise o bloco abaixo:
+--
+-- DECLARE
+--   "id de func" NUMBER;
+-- BEGIN
+--   "ID DE FUNC" := 100;
+-- END;
+-- /
+--
+-- PERGUNTA: O bloco acima executa com sucesso?
+-- A) Sim, porque aspas duplas ignoram maiusculas/minusculas
+-- B) Nao, porque identificadores com espacos sao invalidos
+-- C) Nao, porque "ID DE FUNC" e diferente de "id de func"
+-- D) Sim, porque o valor 100 e valido para NUMBER
+--
+-- Resposta: ___
+--
+-- PERGUNTA BONUS: Como declarar e usar corretamente essa variavel?
+-- Escreva a declaracao e o uso corretos abaixo:
+--
+-- DECLARE
+--   _______________________
+-- BEGIN
+--   _______________________
+-- END;
+-- /
+-- ============================================================

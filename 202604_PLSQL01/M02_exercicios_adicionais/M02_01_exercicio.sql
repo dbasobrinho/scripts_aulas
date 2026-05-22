@@ -1,0 +1,36 @@
+-- ============================================================
+-- CURSO PL/SQL ORACLE | dbasobrinho.com.br
+-- Modulo M02 - Fundamentos da Linguagem
+-- Exercicio M02_01 | Regras de Nomenclatura de Identificadores
+-- ============================================================
+--
+-- ENUNCIADO:
+-- Um identificador em PL/SQL consiste em uma letra seguida de
+-- outras letras, numeros, $ (dolar), _ (sublinhado) e #
+-- (simbolo numerico). O limite maximo e de 30 caracteres.
+-- A linguagem NAO e sensivel a forma (maiusculas = minusculas).
+--
+-- Analise as declaracoes abaixo e identifique qual causa erro:
+--
+-- DECLARE
+--   V_NOME      VARCHAR2(30);   -- (A)
+--   1_CODIGO    NUMBER;         -- (B)
+--   V$SALARIO   NUMBER(10,2);   -- (C)
+--   V_NOME_FUNC VARCHAR2(100);  -- (D)
+-- BEGIN
+--   NULL;
+-- END;
+-- /
+--
+-- PERGUNTA: Qual declaracao de variavel causa erro de compilacao?
+-- A) V_NOME      VARCHAR2(30)
+-- B) 1_CODIGO    NUMBER
+-- C) V$SALARIO   NUMBER(10,2)
+-- D) V_NOME_FUNC VARCHAR2(100)
+--
+-- Resposta: ___
+--
+-- JUSTIFICATIVA (escreva abaixo):
+-- _______________________________________________________________
+-- _______________________________________________________________
+-- ============================================================

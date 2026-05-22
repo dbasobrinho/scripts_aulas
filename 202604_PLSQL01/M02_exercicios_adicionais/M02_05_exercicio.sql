@@ -1,0 +1,48 @@
+-- ============================================================
+-- CURSO PL/SQL ORACLE | dbasobrinho.com.br
+-- Modulo M02 - Fundamentos da Linguagem
+-- Exercicio M02_05 | Literais Booleanos e Atribuicao Invalida
+-- ============================================================
+--
+-- ENUNCIADO:
+-- Literais booleanos sao os valores TRUE, FALSE e NULL.
+-- O tipo BOOLEAN nao possui tamanho e nao pode ser definido
+-- como coluna em uma tabela do banco de dados. Ele e usado
+-- somente em variaveis PL/SQL.
+-- Nao e possivel converter BOOLEAN diretamente para VARCHAR2
+-- usando concatenacao com ||.
+--
+-- Analise o bloco abaixo:
+--
+-- DECLARE
+--   V_ATIVO  BOOLEAN := TRUE;
+--   V_TEXTO  VARCHAR2(10);
+-- BEGIN
+--   V_TEXTO := V_ATIVO;
+--   DBMS_OUTPUT.PUT_LINE('Ativo: ' || V_TEXTO);
+-- END;
+-- /
+--
+-- PERGUNTA: O que acontece quando o bloco e executado?
+-- A) Imprime "Ativo: TRUE"
+-- B) Imprime "Ativo: 1"
+-- C) Erro: BOOLEAN nao pode ser convertido implicitamente
+-- D) Imprime "Ativo: " (string vazia)
+--
+-- Resposta: ___
+--
+-- BONUS: Reescreva o bloco para exibir "TRUE" ou "FALSE"
+-- corretamente usando uma estrutura IF/THEN/ELSE:
+--
+-- DECLARE
+--   V_ATIVO BOOLEAN := TRUE;
+--   V_TEXTO VARCHAR2(10);
+-- BEGIN
+--   -- Escreva aqui a logica:
+--   _________________________________
+--   _________________________________
+--   _________________________________
+--   DBMS_OUTPUT.PUT_LINE('Ativo: ' || V_TEXTO);
+-- END;
+-- /
+-- ============================================================
