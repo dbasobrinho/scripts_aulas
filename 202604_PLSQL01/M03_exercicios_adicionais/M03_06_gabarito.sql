@@ -1,0 +1,25 @@
+-- =============================================================================
+-- MÓDULO 03 - Gabarito 06  |  Fibonacci com LOOP / EXIT WHEN
+-- =============================================================================
+
+-- SET SERVEROUTPUT ON
+
+-- DECLARE
+--   v_a NUMBER := 1;
+--   v_b NUMBER := 1;
+--   v_c NUMBER;
+--   v_n NUMBER := 2;
+-- BEGIN
+--   DBMS_OUTPUT.PUT_LINE('F(1) = 1');
+--   DBMS_OUTPUT.PUT_LINE('F(2) = 1');
+--   LOOP
+--     v_c := v_a + v_b;
+--     v_n := v_n + 1;
+--     DBMS_OUTPUT.PUT_LINE('F(' || v_n || ') = ' || v_c);
+--     v_a := v_b;
+--     v_b := v_c;
+--     EXIT WHEN v_n >= 10;
+--   END LOOP;
+-- END;
+-- /
+-- Saída: 1,1,2,3,5,8,13,21,34,55

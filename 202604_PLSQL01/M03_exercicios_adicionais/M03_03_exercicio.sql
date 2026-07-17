@@ -1,0 +1,34 @@
+-- =============================================================================
+-- MÓDULO 03 - Exercício 03
+-- Tema: WHILE LOOP com condição de negócio
+-- Tipo: Código
+-- Nível: Básico
+-- Sem tabelas necessárias
+-- =============================================================================
+-- CONTEXTO:
+-- Um banco aplica juros compostos mensais de 2%.
+-- Calcule em quantos meses um capital de R$ 1.000
+-- ultrapassa R$ 2.000 (dobra de valor).
+--
+-- TAREFA:
+-- Use WHILE LOOP para simular mês a mês.
+-- Exiba cada mês e o capital acumulado.
+-- Ao final, exiba o total de meses.
+-- =============================================================================
+
+-- SET SERVEROUTPUT ON
+
+-- DECLARE
+--   v_capital NUMBER := 1000;
+--   v_meses   NUMBER := 0;
+--   c_taxa    CONSTANT NUMBER := 0.02;
+--   c_meta    CONSTANT NUMBER := 2000;
+-- BEGIN
+--   WHILE v_capital < c_meta LOOP
+--     v_capital := ...;
+--     v_meses   := ...;
+--     DBMS_OUTPUT.PUT_LINE('Mes ' || LPAD(v_meses,2,'0') || ': R$ ' || TO_CHAR(v_capital,'FM99990.00'));
+--   END LOOP;
+--   DBMS_OUTPUT.PUT_LINE('Dobrou em ' || v_meses || ' meses.');
+-- END;
+-- /

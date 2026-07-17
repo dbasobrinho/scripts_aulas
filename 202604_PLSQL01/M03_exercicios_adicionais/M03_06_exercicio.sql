@@ -1,0 +1,30 @@
+-- =============================================================================
+-- MÓDULO 03 - Exercício 06
+-- Tema: LOOP / EXIT WHEN - sequência de Fibonacci
+-- Tipo: Código  |  Nível: Intermediário  |  Sem tabelas
+-- =============================================================================
+-- TAREFA: Gere os primeiros 10 termos da sequência de Fibonacci.
+-- F(1)=1, F(2)=1, F(n)=F(n-1)+F(n-2)
+-- Use LOOP / EXIT WHEN.
+-- =============================================================================
+
+-- SET SERVEROUTPUT ON
+
+-- DECLARE
+--   v_a NUMBER := 1;
+--   v_b NUMBER := 1;
+--   v_c NUMBER;
+--   v_n NUMBER := 2;
+-- BEGIN
+--   DBMS_OUTPUT.PUT_LINE('F(1) = 1');
+--   DBMS_OUTPUT.PUT_LINE('F(2) = 1');
+--   LOOP
+--     v_c := v_a + v_b;
+--     v_n := v_n + 1;
+--     DBMS_OUTPUT.PUT_LINE('F(' || v_n || ') = ' || v_c);
+--     v_a := ...;
+--     v_b := ...;
+--     EXIT WHEN v_n >= 10;
+--   END LOOP;
+-- END;
+-- /

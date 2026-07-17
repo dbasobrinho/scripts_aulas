@@ -1,0 +1,19 @@
+-- =============================================================================
+-- MÓDULO 03 - Exercício 02
+-- Tema: Comportamento do contador no FOR LOOP
+-- Tipo: Múltipla escolha
+-- Nível: Básico
+-- =============================================================================
+-- O que acontece se você tentar atribuir um valor ao contador
+-- de um FOR LOOP dentro do loop?
+--
+-- FOR i IN 1..5 LOOP
+--   i := i * 2;
+--   DBMS_OUTPUT.PUT_LINE(i);
+-- END LOOP;
+--
+-- A) O loop executa normalmente com valores 2, 4, 6, 8, 10
+-- B) O compilador gera erro PLS-00363: expression cannot be used as assignment target
+-- C) O loop executa sem erro mas ignora a atribuição
+-- D) O loop para na primeira iteração
+-- =============================================================================

@@ -1,0 +1,24 @@
+-- =============================================================================
+-- MÓDULO 03 - Exercício 09
+-- Tema: Labels em loops aninhados - EXIT para loop externo
+-- Tipo: Múltipla escolha  |  Nível: Intermediário
+-- =============================================================================
+-- O bloco abaixo tem dois loops aninhados com labels.
+-- Qual linha de saída é gerada quando i=2 e j=3?
+--
+-- BEGIN
+--   <<externo>>
+--   FOR i IN 1..3 LOOP
+--     FOR j IN 1..5 LOOP
+--       IF i=2 AND j=3 THEN EXIT externo; END IF;
+--       DBMS_OUTPUT.PUT_LINE('i='||i||' j='||j);
+--     END LOOP;
+--   END LOOP externo;
+--   DBMS_OUTPUT.PUT_LINE('Fim');
+-- END;
+--
+-- A) Exibe i=1 j=1 até i=2 j=2, depois pula para Fim
+-- B) Exibe i=1 j=1 até i=1 j=5, depois i=2 j=1 e j=2, depois Fim
+-- C) Exibe i=1 j=1 até i=3 j=5 completando todos
+-- D) Exibe apenas Fim (nunca entra nos loops)
+-- =============================================================================

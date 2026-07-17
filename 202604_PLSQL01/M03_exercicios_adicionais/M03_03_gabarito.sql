@@ -1,0 +1,22 @@
+-- =============================================================================
+-- MÓDULO 03 - Gabarito 03
+-- Tema: WHILE LOOP com condição de negócio
+-- =============================================================================
+
+-- SET SERVEROUTPUT ON
+
+-- DECLARE
+--   v_capital NUMBER := 1000;
+--   v_meses   NUMBER := 0;
+--   c_taxa    CONSTANT NUMBER := 0.02;
+--   c_meta    CONSTANT NUMBER := 2000;
+-- BEGIN
+--   WHILE v_capital < c_meta LOOP
+--     v_capital := v_capital * (1 + c_taxa);
+--     v_meses   := v_meses + 1;
+--     DBMS_OUTPUT.PUT_LINE('Mes ' || LPAD(v_meses,2,'0') || ': R$ ' || TO_CHAR(v_capital,'FM99990.00'));
+--   END LOOP;
+--   DBMS_OUTPUT.PUT_LINE('Dobrou em ' || v_meses || ' meses.');
+-- END;
+-- /
+-- Resultado esperado: ~35 meses para dobrar com 2% ao mes.

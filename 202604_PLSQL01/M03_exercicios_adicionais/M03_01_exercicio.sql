@@ -1,0 +1,14 @@
+-- =============================================================================
+-- MÓDULO 03 - Exercício 01
+-- Tema: Sintaxe correta do IF em PL/SQL
+-- Tipo: Múltipla escolha
+-- Nível: Básico
+-- =============================================================================
+-- Qual das alternativas usa a sintaxe CORRETA em PL/SQL para
+-- testar múltiplas condições encadeadas?
+--
+-- A) IF a > 0 THEN ... ELSEIF b > 0 THEN ... END IF;
+-- B) IF a > 0 THEN ... ELSE IF b > 0 THEN ... END IF; END IF;
+-- C) IF a > 0 THEN ... ELSIF b > 0 THEN ... END IF;
+-- D) IF a > 0 THEN ... ELIF b > 0 THEN ... END IF;
+-- =============================================================================

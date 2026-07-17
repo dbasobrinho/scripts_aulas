@@ -1,0 +1,41 @@
+-- =============================================================================
+-- MÓDULO 03 - Gabarito 10  |  Relatório por departamento
+-- =============================================================================
+
+-- SET SERVEROUTPUT ON
+
+-- DECLARE
+--   v_cnt10 NUMBER := 0; v_sal10 NUMBER := 0;
+--   v_cnt20 NUMBER := 0; v_sal20 NUMBER := 0;
+--   v_cnt30 NUMBER := 0; v_sal30 NUMBER := 0;
+--   v_class VARCHAR2(10);
+-- BEGIN
+--   FOR r IN (SELECT deptno, sal FROM emp) LOOP
+--     IF r.deptno = 10 THEN
+--       v_cnt10 := v_cnt10 + 1; v_sal10 := v_sal10 + r.sal;
+--     ELSIF r.deptno = 20 THEN
+--       v_cnt20 := v_cnt20 + 1; v_sal20 := v_sal20 + r.sal;
+--     ELSIF r.deptno = 30 THEN
+--       v_cnt30 := v_cnt30 + 1; v_sal30 := v_sal30 + r.sal;
+--     END IF;
+--   END LOOP;
+
+--   DBMS_OUTPUT.PUT_LINE(RPAD('Dept',6) || RPAD('Func',6) || RPAD('Total Sal',12) || 'Porte');
+--   DBMS_OUTPUT.PUT_LINE(RPAD('-',35,'-'));
+
+--   FOR rec IN (
+--     SELECT 10 AS deptno, v_cnt10 AS cnt, v_sal10 AS total FROM dual UNION ALL
+--     SELECT 20, v_cnt20, v_sal20 FROM dual UNION ALL
+--     SELECT 30, v_cnt30, v_sal30 FROM dual
+--   ) LOOP
+--     CASE
+--       WHEN rec.cnt >= 4 THEN v_class := 'GRANDE';
+--       WHEN rec.cnt >= 2 THEN v_class := 'MEDIO';
+--       ELSE                   v_class := 'PEQUENO';
+--     END CASE;
+--     DBMS_OUTPUT.PUT_LINE(
+--       RPAD(rec.deptno,6) || RPAD(rec.cnt,6) ||
+--       RPAD(TO_CHAR(rec.total,'FM99990.00'),12) || v_class);
+--   END LOOP;
+-- END;
+-- /

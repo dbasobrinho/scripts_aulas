@@ -1,0 +1,21 @@
+-- =============================================================================
+-- MÓDULO 03 - Gabarito 08  |  FOR REVERSE + Top 3 salários
+-- =============================================================================
+
+-- SET SERVEROUTPUT ON
+
+-- DECLARE
+--   v_count NUMBER := 0;
+-- BEGIN
+--   FOR i IN REVERSE 1..10 LOOP
+--     DBMS_OUTPUT.PUT_LINE('Contagem: ' || i);
+--   END LOOP;
+--   DBMS_OUTPUT.PUT_LINE('Lancando!');
+--   DBMS_OUTPUT.PUT_LINE('=== Top 3 Salarios ===');
+--   FOR r IN (SELECT ename, sal FROM emp ORDER BY sal DESC) LOOP
+--     v_count := v_count + 1;
+--     EXIT WHEN v_count > 3;
+--     DBMS_OUTPUT.PUT_LINE(INITCAP(r.ename) || ': R$ ' || TO_CHAR(r.sal,'FM9990.00'));
+--   END LOOP;
+-- END;
+-- /

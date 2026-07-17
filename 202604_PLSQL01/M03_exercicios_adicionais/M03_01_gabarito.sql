@@ -1,0 +1,31 @@
+-- =============================================================================
+-- MÓDULO 03 - Gabarito 01
+-- Tema: Sintaxe correta do IF em PL/SQL
+-- =============================================================================
+
+-- Resposta: C
+--
+-- Em PL/SQL, a palavra-chave correta é ELSIF (sem E no meio).
+-- A) ERRADO: ELSEIF não existe em PL/SQL (existe em outras linguagens)
+-- B) ERRADO: ELSE IF separado cria um IF aninhado diferente, requer dois END IF
+-- C) CORRETO: ELSIF é a palavra reservada do Oracle PL/SQL
+-- D) ERRADO: ELIF não existe em PL/SQL (existe em Python, por exemplo)
+
+-- SET SERVEROUTPUT ON
+
+-- DECLARE
+--   v_x NUMBER := 75;
+--   v_conceito VARCHAR2(10);
+-- BEGIN
+--   IF v_x >= 90 THEN
+--     v_conceito := 'A';
+--   ELSIF v_x >= 70 THEN
+--     v_conceito := 'B';
+--   ELSIF v_x >= 50 THEN
+--     v_conceito := 'C';
+--   ELSE
+--     v_conceito := 'D';
+--   END IF;
+--   DBMS_OUTPUT.PUT_LINE('Nota: ' || v_x || ' | Conceito: ' || v_conceito);
+-- END;
+-- /

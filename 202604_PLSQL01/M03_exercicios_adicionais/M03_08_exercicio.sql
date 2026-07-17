@@ -1,0 +1,25 @@
+-- =============================================================================
+-- MÓDULO 03 - Exercício 08
+-- Tema: FOR LOOP REVERSE com EMP
+-- Tipo: Código  |  Nível: Básico  |  Requer: EMP
+-- =============================================================================
+-- TAREFA:
+-- Exiba uma contagem regressiva de 10 a 1 e ao final
+-- liste os 3 funcionários com maior salário (ORDER BY sal DESC)
+-- usando FOR LOOP com cursor implícito e contagem com variável.
+-- =============================================================================
+
+-- SET SERVEROUTPUT ON
+
+-- BEGIN
+--   FOR i IN REVERSE 1..10 LOOP
+--     DBMS_OUTPUT.PUT_LINE(...);
+--   END LOOP;
+--   DBMS_OUTPUT.PUT_LINE('Lancando...');
+--   DBMS_OUTPUT.PUT_LINE('=== Top 3 Salarios ===');
+--   FOR r IN (SELECT ename, sal FROM emp ORDER BY sal DESC) LOOP
+--     EXIT WHEN ...; -- sair apos 3
+--     DBMS_OUTPUT.PUT_LINE(r.ename || ': ' || r.sal);
+--   END LOOP;
+-- END;
+-- /

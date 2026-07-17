@@ -1,0 +1,37 @@
+-- =============================================================================
+-- MÓDULO 03 - Exercício 10
+-- Tema: Bloco completo - IF, CASE, FOR LOOP e acumuladores
+-- Tipo: Código  |  Nível: Intermediário  |  Requer: EMP
+-- =============================================================================
+-- CONTEXTO: O RH precisa de um relatório de departamentos com:
+--   - Total de funcionários por dept (10, 20, 30)
+--   - Soma de salários por dept
+--   - Classificação do dept: 'GRANDE'(>= 4 func), 'MEDIO'(2-3), 'PEQUENO'(1)
+--
+-- TAREFA:
+-- 1. Declare acumuladores de count e sum para dept 10, 20, 30
+-- 2. Use FOR LOOP com cursor implícito
+-- 3. Use IF/ELSIF para acumular por dept
+-- 4. Ao final, use CASE para classificar cada dept e exibir relatório
+-- =============================================================================
+
+-- SET SERVEROUTPUT ON
+
+-- DECLARE
+--   v_cnt10 NUMBER := 0; v_sal10 NUMBER := 0;
+--   v_cnt20 NUMBER := 0; v_sal20 NUMBER := 0;
+--   v_cnt30 NUMBER := 0; v_sal30 NUMBER := 0;
+--   v_class VARCHAR2(10);
+-- BEGIN
+--   FOR r IN (SELECT deptno, sal FROM emp) LOOP
+--     IF r.deptno = 10 THEN ...
+--     ELSIF r.deptno = 20 THEN ...
+--     ELSIF r.deptno = 30 THEN ...
+--     END IF;
+--   END LOOP;
+
+  -- Exibir relatório
+--   DBMS_OUTPUT.PUT_LINE(RPAD('Dept',6) || RPAD('Func',6) || RPAD('Total Sal',12) || 'Porte');
+  -- ... completar para os 3 departamentos
+-- END;
+-- /

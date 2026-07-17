@@ -1,0 +1,12 @@
+-- =============================================================================
+-- MÓDULO 03 - Exercício 07
+-- Tema: Análise - diferença entre LOOP e WHILE
+-- Tipo: Múltipla escolha  |  Nível: Básico
+-- =============================================================================
+-- Qual é a principal diferença entre LOOP/EXIT WHEN e WHILE LOOP?
+--
+-- A) LOOP executa sempre ao menos 1 vez; WHILE pode executar 0 vezes
+-- B) WHILE é mais rápido que LOOP
+-- C) LOOP não aceita EXIT WHEN; apenas EXIT
+-- D) WHILE não pode ter EXIT dentro do corpo
+-- =============================================================================
