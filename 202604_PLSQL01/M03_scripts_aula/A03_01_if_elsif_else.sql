@@ -8,6 +8,16 @@
 -- =============================================================================
 
 SET SERVEROUTPUT ON
+SET DEFINE ON
+
+-- -----------------------------------------------------------------------------
+-- VALORES PARA TESTAR (digite um EMPNO quando o script pedir):
+--   7839  KING   sal 5000  -> SENIOR
+--   7788  SCOTT  sal 3000  -> PLENO
+--   7698  BLAKE  sal 2850  -> JUNIOR
+--   7369  SMITH  sal  800  -> TRAINEE
+-- Rode varias vezes trocando o EMPNO e veja a classe mudar.
+-- -----------------------------------------------------------------------------
 
 DECLARE
   v_sal    emp.sal%TYPE;
@@ -15,7 +25,7 @@ DECLARE
   v_classe VARCHAR2(10);
 BEGIN
   SELECT sal, ename INTO v_sal, v_nome
-  FROM emp WHERE empno = 7839;
+  FROM emp WHERE empno = &empno;
 
   IF v_sal > 5000 THEN
     v_classe := 'SENIOR';
@@ -32,4 +42,3 @@ BEGIN
   DBMS_OUTPUT.PUT_LINE('Classe     : ' || v_classe);
 END;
 /
--- Testar com: 7698 (BLAKE 2850), 7369 (SMITH 800), 7788 (SCOTT 3000)

@@ -7,13 +7,22 @@
 -- =============================================================================
 
 SET SERVEROUTPUT ON
+SET DEFINE ON
 
 -- PARTE 1: CASE simples
+-- -----------------------------------------------------------------------------
+-- VALORES PARA TESTAR (digite um EMPNO quando pedir "emp_cargo"):
+--   7839  KING   -> PRESIDENT
+--   7698  BLAKE  -> MANAGER
+--   7788  SCOTT  -> ANALYST
+--   7369  SMITH  -> CLERK
+--   7499  ALLEN  -> SALESMAN
+-- -----------------------------------------------------------------------------
 DECLARE
   v_job  emp.job%TYPE;
   v_desc VARCHAR2(30);
 BEGIN
-  SELECT job INTO v_job FROM emp WHERE empno = 7839;
+  SELECT job INTO v_job FROM emp WHERE empno = &emp_cargo;
   CASE v_job
     WHEN 'PRESIDENT' THEN v_desc := 'Presidente da empresa';
     WHEN 'MANAGER'   THEN v_desc := 'Gerente de equipe';
@@ -28,11 +37,18 @@ END;
 /
 
 -- PARTE 2: CASE pesquisado
+-- -----------------------------------------------------------------------------
+-- VALORES PARA TESTAR (digite um EMPNO quando pedir "emp_bonus"):
+--   7839  KING   sal 5000  -> bonus 8%
+--   7698  BLAKE  sal 2850  -> bonus 10%
+--   7499  ALLEN  sal 1600  -> bonus 12%
+--   7369  SMITH  sal  800  -> bonus 15%
+-- -----------------------------------------------------------------------------
 DECLARE
   v_sal   emp.sal%TYPE;
   v_bonus NUMBER(10,2);
 BEGIN
-  SELECT sal INTO v_sal FROM emp WHERE empno = 7698;
+  SELECT sal INTO v_sal FROM emp WHERE empno = &emp_bonus;
   CASE
     WHEN v_sal > 4000 THEN v_bonus := v_sal * 0.08;
     WHEN v_sal > 2500 THEN v_bonus := v_sal * 0.10;

@@ -4,6 +4,7 @@
 -- =============================================================================
 
 -- SET SERVEROUTPUT ON
+-- SET DEFINE ON
 
 -- DECLARE
 --   v_nome  emp.ename%TYPE;
@@ -11,7 +12,7 @@
 --   v_bonus NUMBER(10,2);
 --   v_faixa VARCHAR2(20);
 -- BEGIN
---   SELECT ename, sal INTO v_nome, v_sal FROM emp WHERE empno = 7566;
+--   SELECT ename, sal INTO v_nome, v_sal FROM emp WHERE empno = &empno;
 
 --   CASE
 --     WHEN v_sal > 4000          THEN v_faixa := 'Alta';  v_bonus := v_sal * 0.10;
@@ -25,4 +26,7 @@
 --   DBMS_OUTPUT.PUT_LINE('Bonus : ' || TO_CHAR(v_bonus, 'FM99990.00'));
 -- END;
 -- /
--- JONES: sal=2975, faixa=Media, bonus=446.25
+-- Exemplos de saida conforme o EMPNO digitado:
+--   7839 KING  : sal=5000, faixa=Alta,  bonus=500.00
+--   7566 JONES : sal=2975, faixa=Media, bonus=446.25
+--   7369 SMITH : sal= 800, faixa=Baixa, bonus=160.00

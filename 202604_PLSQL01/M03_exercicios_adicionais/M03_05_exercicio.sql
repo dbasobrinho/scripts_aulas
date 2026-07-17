@@ -6,15 +6,21 @@
 -- Requer: Schema EMP
 -- =============================================================================
 -- TAREFA:
--- Para o funcionário empno = 7566 (JONES):
--- Use CASE pesquisado para determinar:
+-- Peça o EMPNO ao aluno com variável de substituição (&empno) e, para o
+-- funcionário informado, use CASE pesquisado para determinar:
 --   Se sal > 4000: bonus = sal * 0.10
 --   Se sal entre 2000 e 4000: bonus = sal * 0.15
 --   Senão: bonus = sal * 0.20
 -- Exiba: nome, salário, faixa e bônus.
+-- -----------------------------------------------------------------------------
+-- VALORES PARA TESTAR (digite um EMPNO quando o script pedir):
+--   7839  KING   sal 5000  -> faixa Alta
+--   7566  JONES  sal 2975  -> faixa Media
+--   7369  SMITH  sal  800  -> faixa Baixa
 -- =============================================================================
 
 -- SET SERVEROUTPUT ON
+-- SET DEFINE ON
 
 -- DECLARE
 --   v_nome  emp.ename%TYPE;
@@ -22,7 +28,7 @@
 --   v_bonus NUMBER(10,2);
 --   v_faixa VARCHAR2(20);
 -- BEGIN
---   SELECT ename, sal INTO v_nome, v_sal FROM emp WHERE empno = 7566;
+--   SELECT ename, sal INTO v_nome, v_sal FROM emp WHERE empno = &empno;
 
 --   CASE
 --     WHEN ... THEN ...

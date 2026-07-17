@@ -8,10 +8,21 @@
 -- ============================================================================
 
 SET SERVEROUTPUT ON SIZE UNLIMITED
-SET DEFINE OFF
+SET DEFINE ON
+SET VERIFY OFF
 SET ECHO OFF
 SET PAUSE OFF
 WHENEVER SQLERROR CONTINUE
+
+-- ----------------------------------------------------------------------------
+-- VALORES PADRAO para os scripts interativos (A03_01, A03_02).
+-- Ja definidos aqui para o runner executar TUDO sem parar pedindo digitacao.
+-- Com a variavel ja DEFINEd, o & usa o valor sem perguntar.
+-- Troque a vontade para testar outros funcionarios.
+-- ----------------------------------------------------------------------------
+DEFINE empno     = 7839   -- A03_01        : KING  (sal 5000) -> SENIOR
+DEFINE emp_cargo = 7839   -- A03_02 parte 1: KING            -> PRESIDENT
+DEFINE emp_bonus = 7698   -- A03_02 parte 2: BLAKE (sal 2850) -> bonus 10%
 
 PROMPT
 PROMPT ============================================================
