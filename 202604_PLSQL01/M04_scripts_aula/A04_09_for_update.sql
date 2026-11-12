@@ -168,6 +168,60 @@ BEGIN
 END;
 /
 
+-- ------------------------------------------------------------
+-- EXEMPLO 3b: FOR UPDATE WAIT n - onde aparecem os n segundos
+-- ------------------------------------------------------------
+-- O n fica escrito no próprio cursor: FOR UPDATE WAIT 5 = até 5 segundos.
+-- Para ver a espera numa sessão só, o bloco:
+--   1. bloqueia o dept 10 com um UPDATE (transação principal, sem COMMIT);
+--   2. chama uma procedure local com PRAGMA AUTONOMOUS_TRANSACTION.
+--      Ela é uma transação SEPARADA, como se fosse outra sessão;
+--   3. o cursor dela tenta travar as mesmas linhas com WAIT 5,
+--      espera 5 segundos e recebe ORA-30006.
+-- A saída mostra o tempo que ela ficou esperando.
+-- Para demonstrar com DUAS sessões: na sessão A rode
+--   UPDATE emp SET sal = sal WHERE deptno = 10;   (sem COMMIT)
+-- e na sessão B abra um cursor com FOR UPDATE WAIT 5 no dept 10.
+-- Depois, ROLLBACK na sessão A.
+-- ------------------------------------------------------------
+DECLARE
+  PROCEDURE tenta_travar IS
+    PRAGMA AUTONOMOUS_TRANSACTION;   -- outra transação: não enxerga o lock como dela
+    CURSOR c_sal IS
+      SELECT empno, ename, sal
+      FROM   emp
+      WHERE  deptno = 10
+      FOR UPDATE WAIT 5;             -- <== aqui está o n: espera até 5 segundos
+    v_inicio TIMESTAMP := SYSTIMESTAMP;
+  BEGIN
+    DBMS_OUTPUT.PUT_LINE('Abrindo cursor com FOR UPDATE WAIT 5...');
+    OPEN c_sal;                      -- o lock é pedido no OPEN: é aqui que espera
+    CLOSE c_sal;
+    ROLLBACK;
+    DBMS_OUTPUT.PUT_LINE('Conseguiu o lock (ninguem estava segurando as linhas).');
+  EXCEPTION
+    WHEN OTHERS THEN
+      IF SQLCODE = -30006 THEN
+        DBMS_OUTPUT.PUT_LINE('ORA-30006 depois de '
+          || TO_CHAR(EXTRACT(SECOND FROM (SYSTIMESTAMP - v_inicio)), 'FM990.00')
+          || ' segundos de espera.');
+        ROLLBACK;
+      ELSE
+        ROLLBACK;
+        RAISE;
+      END IF;
+  END tenta_travar;
+BEGIN
+  UPDATE emp SET sal = sal WHERE deptno = 10;   -- trava as linhas do dept 10
+  DBMS_OUTPUT.PUT_LINE('Transacao principal travou ' || SQL%ROWCOUNT || ' linha(s) do dept 10.');
+
+  tenta_travar;
+
+  ROLLBACK;                                      -- libera o lock da transação principal
+  DBMS_OUTPUT.PUT_LINE('ROLLBACK aplicado - lock liberado.');
+END;
+/
+
 -- ============================================================
 -- SEÇÃO 4: WHERE CURRENT OF vs WHERE chave_primaria
 -- ============================================================
