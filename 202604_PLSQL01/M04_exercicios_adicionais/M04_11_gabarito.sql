@@ -1,0 +1,106 @@
+-- =============================================================================
+-- MÓDULO 04 - Gabarito 11
+-- Tema: FOR UPDATE e WHERE CURRENT OF - reajuste salarial com lock
+-- Tipo: Código
+-- Nível: Intermediário
+-- Schema: EMP
+-- Ref: 1Z0-149 Topic 6 - FOR UPDATE / WHERE CURRENT OF
+-- =============================================================================
+
+-- SET SERVEROUTPUT ON
+
+-- DECLARE
+--   CURSOR c_reajuste IS
+--     SELECT empno, ename, sal, deptno
+--     FROM   emp
+--     WHERE  sal BETWEEN 1000 AND 3000
+--     FOR UPDATE OF sal NOWAIT;
+
+--   v_novo_sal  emp.sal%TYPE;
+--   v_cnt_baixo NUMBER := 0;
+--   v_cnt_medio NUMBER := 0;
+--   v_cnt_alto  NUMBER := 0;
+-- BEGIN
+--   DBMS_OUTPUT.PUT_LINE('=== Reajuste Salarial por Faixa ===');
+--   DBMS_OUTPUT.PUT_LINE(RPAD('Nome',       12) ||
+--                        RPAD('Sal Atual',  12) ||
+--                        RPAD('Sal Novo',   12) ||
+--                        'Faixa');
+
+--   FOR r IN c_reajuste LOOP
+
+--     IF r.sal < 1500 THEN
+--       v_novo_sal  := r.sal * 1.20;
+--       v_cnt_baixo := v_cnt_baixo + 1;
+--     ELSIF r.sal <= 2500 THEN
+--       v_novo_sal  := r.sal * 1.10;
+--       v_cnt_medio := v_cnt_medio + 1;
+--     ELSE
+--       v_novo_sal  := r.sal * 1.05;
+--       v_cnt_alto  := v_cnt_alto + 1;
+--     END IF;
+
+--     UPDATE emp
+--     SET    sal = v_novo_sal
+--     WHERE  CURRENT OF c_reajuste;
+
+--     DBMS_OUTPUT.PUT_LINE(
+--       RPAD(INITCAP(r.ename), 12) ||
+--       RPAD(TO_CHAR(r.sal,       'FM9990.00'), 12) ||
+--       RPAD(TO_CHAR(v_novo_sal,  'FM9990.00'), 12) ||
+--       CASE WHEN r.sal < 1500  THEN 'Baixo (20%)'
+--            WHEN r.sal <= 2500 THEN 'Medio (10%)'
+--            ELSE                    'Alto  (5%)'
+--       END
+--     );
+--   END LOOP;
+
+--   DBMS_OUTPUT.PUT_LINE('');
+--   DBMS_OUTPUT.PUT_LINE('Resumo:');
+--   DBMS_OUTPUT.PUT_LINE('  Faixa Baixo (<1500):        ' || v_cnt_baixo || ' funcionario(s)');
+--   DBMS_OUTPUT.PUT_LINE('  Faixa Medio (1500-2500):    ' || v_cnt_medio || ' funcionario(s)');
+--   DBMS_OUTPUT.PUT_LINE('  Faixa Alto  (>2500):        ' || v_cnt_alto  || ' funcionario(s)');
+
+--   ROLLBACK;
+--   DBMS_OUTPUT.PUT_LINE('');
+--   DBMS_OUTPUT.PUT_LINE('ROLLBACK aplicado - dados restaurados.');
+-- END;
+-- /
+
+-- =============================================================================
+-- SAIDA ESPERADA (Schema EMP padrao):
+-- =============================================================================
+-- === Reajuste Salarial por Faixa ===
+-- Nome        Sal Atual   Sal Novo    Faixa
+-- Allen       1600.00     1760.00     Medio (10%)
+-- Ward        1250.00     1500.00     Baixo (20%)
+-- Jones       2975.00     3123.75     Alto  (5%)
+-- Martin      1250.00     1500.00     Baixo (20%)
+-- Blake       2850.00     2992.50     Alto  (5%)
+-- Clark       2450.00     2695.00     Medio (10%)
+-- Scott       3000.00     3150.00     Alto  (5%)
+-- Turner      1500.00     1650.00     Medio (10%)
+-- Adams       1100.00     1320.00     Baixo (20%)
+-- Ford        3000.00     3150.00     Alto  (5%)
+-- Miller      1300.00     1560.00     Baixo (20%)
+--
+-- Resumo:
+--   Faixa Baixo (<1500):        4 funcionario(s)
+--   Faixa Medio (1500-2500):    3 funcionario(s)
+--   Faixa Alto  (>2500):        4 funcionario(s)
+--
+-- ROLLBACK aplicado - dados restaurados.
+--
+-- (Saída real, conferida no Oracle 26ai em 09/11/2026.)
+-- Sem ORDER BY, a ordem é a física da SCOTT.EMP padrão.
+-- Ficam de fora: Smith (800) e James (950), abaixo de 1000; King (5000), acima de 3000.
+-- Bordas: Turner (1500) cai em Medio; Scott e Ford (3000) entram, porque o BETWEEN inclui as pontas.
+-- =============================================================================
+-- PONTOS DE ATENCAO:
+--   1. NOWAIT: se outra sessao tiver lock nas linhas, o bloco falha
+--      imediatamente com ORA-00054. Em produção, trate com EXCEPTION.
+--   2. WHERE CURRENT OF c_reajuste: o Oracle usa o ROWID interno do cursor
+--      para localizar a linha - mais eficiente que WHERE empno = r.empno.
+--   3. O ROLLBACK ao final libera também o lock adquirido pelo FOR UPDATE.
+--   4. FOR UPDATE OF sal: bloqueia apenas a tabela de emp.sal, não DEPT.
+-- =============================================================================

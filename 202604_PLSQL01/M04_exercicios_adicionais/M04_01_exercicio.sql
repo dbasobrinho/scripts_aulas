@@ -1,0 +1,27 @@
+-- =============================================================================
+-- MÓDULO 04 - Exercício 01
+-- Tema: Diferença entre cursor implícito e cursor explícito
+-- Tipo: Múltipla escolha
+-- Nível: Básico
+-- =============================================================================
+-- QUESTAO:
+-- Qual das afirmações abaixo descreve CORRETAMENTE a diferença
+-- entre cursor implícito e cursor explícito em PL/SQL Oracle 19c?
+--
+-- A) O cursor implícito exige OPEN, FETCH e CLOSE pelo programador.
+--    O cursor explícito e gerenciado automaticamente pelo Oracle.
+--
+-- B) O cursor implícito e aberto automaticamente pelo Oracle para
+--    cada SELECT INTO, INSERT, UPDATE e DELETE.
+--    O cursor explícito e declarado pelo programador com CURSOR nome IS SELECT.
+--
+-- C) Ambos exigem OPEN/FETCH/CLOSE explicitamente no código.
+--
+-- D) O cursor implícito pode retornar múltiplas linhas diretamente
+--    sem erro. O cursor explícito retorna apenas uma linha.
+--
+-- E) O cursor explícito não possui atributos como %FOUND e %ROWCOUNT.
+--    Esses atributos existem apenas no cursor implícito (SQL%).
+--
+-- RESPOSTA: ___
+-- =============================================================================

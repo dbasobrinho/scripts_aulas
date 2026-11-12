@@ -1,0 +1,26 @@
+-- =============================================================================
+-- MÓDULO 04 - Exercício 08
+-- Tema: Comportamento do cursor explícito após CLOSE
+-- Tipo: Múltipla escolha
+-- Nível: Básico
+-- =============================================================================
+-- QUESTAO:
+-- Após executar CLOSE em um cursor explícito, qual operação ainda e válida?
+--
+-- A) FETCH c_emp INTO v_rec;
+--    (buscar mais uma linha do cursor fechado)
+--
+-- B) IF c_emp%ISOPEN THEN ...
+--    (verificar se o cursor está aberto)
+--
+-- C) v_n := c_emp%ROWCOUNT;
+--    (ler o número de linhas lidas - cursor já fechado)
+--
+-- D) IF c_emp%FOUND THEN ...
+--    (verificar se o último FETCH trouxe linha)
+--
+-- E) IF c_emp%NOTFOUND THEN ...
+--    (verificar se o último FETCH não trouxe linha)
+--
+-- RESPOSTA: ___
+-- =============================================================================

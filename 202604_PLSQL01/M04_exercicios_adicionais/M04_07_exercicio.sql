@@ -1,0 +1,42 @@
+-- =============================================================================
+-- MÓDULO 04 - Exercício 07
+-- Tema: %ROWTYPE para buscar e exibir linha completa de EMP
+-- Tipo: Código
+-- Nível: Básico
+-- Schema: EMP
+-- =============================================================================
+-- TAREFA:
+-- Escreva um bloco anônimo que:
+--   1. Declare uma variável do tipo EMP%ROWTYPE
+--   2. Busque a linha completa do funcionário EMPNO = 7788 (SCOTT)
+--   3. Exiba todos os campos da linha no formato:
+--        EMPNO   : 7788
+--        NOME    : Scott
+--        CARGO   : Analyst
+--        GERENTE : 7566
+--        ADMISSAO: 19/04/1987
+--        SALARIO : $3000.00
+--        COMISSAO: (nulo)
+--        DEPT    : 20
+--   4. Para COMM, exiba "(nulo)" se for NULL, ou o valor formatado
+-- =============================================================================
+
+-- SET SERVEROUTPUT ON
+
+-- DECLARE
+--   v_emp emp%ROWTYPE;
+-- BEGIN
+--   SELECT * INTO ...
+--   FROM   emp
+--   WHERE  empno = ...;
+
+--   DBMS_OUTPUT.PUT_LINE('EMPNO   : ' || ...);
+--   DBMS_OUTPUT.PUT_LINE('NOME    : ' || INITCAP(...));
+--   DBMS_OUTPUT.PUT_LINE('CARGO   : ' || INITCAP(...));
+--   DBMS_OUTPUT.PUT_LINE('GERENTE : ' || NVL(TO_CHAR(...), '(sem gerente)'));
+--   DBMS_OUTPUT.PUT_LINE('ADMISSAO: ' || TO_CHAR(..., 'DD/MM/YYYY'));
+--   DBMS_OUTPUT.PUT_LINE('SALARIO : ' || TO_CHAR(..., 'FM$99990.00'));
+--   DBMS_OUTPUT.PUT_LINE('COMISSAO: ' || NVL(TO_CHAR(..., 'FM$99990.00'), '(nulo)'));
+--   DBMS_OUTPUT.PUT_LINE('DEPT    : ' || ...);
+-- END;
+-- /

@@ -1,0 +1,25 @@
+-- =============================================================================
+-- MÓDULO 04 - Gabarito 01
+-- Tema: Diferença entre cursor implícito e cursor explícito
+-- =============================================================================
+-- RESPOSTA CORRETA: B
+--
+-- JUSTIFICATIVA:
+-- O Oracle abre automaticamente um cursor implícito para:
+--   - SELECT INTO (retorna exatamente 1 linha)
+--   - INSERT, UPDATE, DELETE (qualquer número de linhas)
+-- Os atributos SQL%FOUND, SQL%NOTFOUND, SQL%ROWCOUNT, SQL%ISOPEN
+-- pertencem ao cursor implícito mais recente.
+--
+-- O cursor explícito e definido pelo programador:
+--   CURSOR nome IS SELECT ...;
+-- E requer o ciclo completo: OPEN -> FETCH -> CLOSE
+-- (ou uso do Cursor FOR LOOP que automatiza esse ciclo).
+--
+-- Por que as outras estão erradas:
+--   A) Invertida: e o explícito que exige OPEN/FETCH/CLOSE.
+--   C) Errada: cursor implícito NÃO exige OPEN/FETCH/CLOSE.
+--   D) Errada: SELECT INTO com múltiplas linhas lanca TOO_MANY_ROWS.
+--   E) Errada: cursores explicitos TEM atributos %FOUND, %NOTFOUND,
+--              %ROWCOUNT, %ISOPEN - acessados como c_nome%FOUND.
+-- =============================================================================

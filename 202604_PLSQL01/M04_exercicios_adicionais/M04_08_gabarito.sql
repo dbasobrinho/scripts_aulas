@@ -1,0 +1,22 @@
+-- =============================================================================
+-- MÓDULO 04 - Gabarito 08
+-- Tema: Comportamento do cursor explícito após CLOSE
+-- =============================================================================
+-- RESPOSTA CORRETA: B
+--
+-- JUSTIFICATIVA:
+-- Após CLOSE, o único atributo válido e %ISOPEN - e ele retornara FALSE.
+-- Acessar %FOUND, %NOTFOUND ou %ROWCOUNT após CLOSE lanca INVALID_CURSOR.
+-- FETCH após CLOSE também lanca INVALID_CURSOR.
+--
+-- Regra prática:
+--   - Se precisar do %ROWCOUNT após CLOSE, guarde em uma variável antes.
+--   - Use %ISOPEN para proteger fechamentos condicionais:
+--       IF c_emp%ISOPEN THEN CLOSE c_emp; END IF;
+--
+-- Por que as outras estão erradas:
+--   A) FETCH em cursor fechado = INVALID_CURSOR (ORA-01001)
+--   C) %ROWCOUNT em cursor fechado = INVALID_CURSOR (ORA-01001)
+--   D) %FOUND em cursor fechado = INVALID_CURSOR (ORA-01001)
+--   E) %NOTFOUND em cursor fechado = INVALID_CURSOR (ORA-01001)
+-- =============================================================================

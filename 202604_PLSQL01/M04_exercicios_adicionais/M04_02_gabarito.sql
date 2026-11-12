@@ -1,0 +1,25 @@
+-- =============================================================================
+-- MÓDULO 04 - Gabarito 02
+-- Tema: Comportamento do OPEN em cursor já aberto
+-- =============================================================================
+-- RESPOSTA CORRETA: B
+--
+-- JUSTIFICATIVA:
+-- Tentar abrir um cursor que já está aberto lanca a exceção predefinida
+-- CURSOR_ALREADY_OPEN (ORA-06511).
+-- O Oracle não reinicia nem ignora - ele sinaliza o erro imediatamente.
+--
+-- Solução correta: sempre CLOSE antes de OPEN novamente.
+-- Ou use %ISOPEN para verificar antes:
+--
+--   IF c_emp%ISOPEN THEN
+--     CLOSE c_emp;
+--   END IF;
+--   OPEN c_emp;
+--
+-- Por que as outras estão erradas:
+--   A) Errada: não ha reinicio automático; o Oracle lanca exceção.
+--   C) Errada: o Oracle nunca ignora silenciosamente - lanca erro.
+--   D) Errada: não ha fechamento automático; isso causaria ambiguidade.
+--   E) Errada: TOO_MANY_ROWS e lancado por SELECT INTO, não por OPEN duplo.
+-- =============================================================================

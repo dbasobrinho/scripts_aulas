@@ -1,0 +1,33 @@
+-- =============================================================================
+-- MÓDULO 04 - Exercício 02
+-- Tema: Comportamento do OPEN em cursor já aberto
+-- Tipo: Múltipla escolha
+-- Nível: Básico
+-- =============================================================================
+-- QUESTAO:
+-- Considere o bloco abaixo:
+--
+--   DECLARE
+--     CURSOR c_emp IS SELECT empno FROM emp;
+--     v_id emp.empno%TYPE;
+--   BEGIN
+--     OPEN c_emp;
+--     FETCH c_emp INTO v_id;
+--     OPEN c_emp;   -- segunda chamada sem CLOSE antes
+--     CLOSE c_emp;
+--   END;
+--
+-- O que ocorre quando o bloco e executado?
+--
+-- A) O segundo OPEN reinicia o cursor desde a primeira linha sem erro.
+--
+-- B) O segundo OPEN lanca CURSOR_ALREADY_OPEN (ORA-06511).
+--
+-- C) O segundo OPEN e ignorado silenciosamente pelo Oracle.
+--
+-- D) O segundo OPEN fecha automaticamente o cursor e o reabre.
+--
+-- E) O segundo OPEN lanca TOO_MANY_ROWS.
+--
+-- RESPOSTA: ___
+-- =============================================================================

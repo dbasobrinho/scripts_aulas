@@ -1,0 +1,33 @@
+-- =============================================================================
+-- MÓDULO 04 - Gabarito 07
+-- Tema: %ROWTYPE para buscar e exibir linha completa de EMP
+-- =============================================================================
+
+-- SET SERVEROUTPUT ON
+
+-- DECLARE
+--   v_emp emp%ROWTYPE;
+-- BEGIN
+--   SELECT * INTO v_emp
+--   FROM   emp
+--   WHERE  empno = 7788;
+
+--   DBMS_OUTPUT.PUT_LINE('EMPNO   : ' || v_emp.empno);
+--   DBMS_OUTPUT.PUT_LINE('NOME    : ' || INITCAP(v_emp.ename));
+--   DBMS_OUTPUT.PUT_LINE('CARGO   : ' || INITCAP(v_emp.job));
+--   DBMS_OUTPUT.PUT_LINE('GERENTE : ' || NVL(TO_CHAR(v_emp.mgr), '(sem gerente)'));
+--   DBMS_OUTPUT.PUT_LINE('ADMISSAO: ' || TO_CHAR(v_emp.hiredate, 'DD/MM/YYYY'));
+--   DBMS_OUTPUT.PUT_LINE('SALARIO : ' || TO_CHAR(v_emp.sal, 'FM$99990.00'));
+--   DBMS_OUTPUT.PUT_LINE('COMISSAO: ' || NVL(TO_CHAR(v_emp.comm, 'FM$99990.00'), '(nulo)'));
+--   DBMS_OUTPUT.PUT_LINE('DEPT    : ' || v_emp.deptno);
+-- END;
+-- /
+-- Resultado esperado:
+-- EMPNO   : 7788
+-- NOME    : Scott
+-- CARGO   : Analyst
+-- GERENTE : 7566
+-- ADMISSAO: 19/04/1987
+-- SALARIO : $3000.00
+-- COMISSAO: (nulo)
+-- DEPT    : 20
