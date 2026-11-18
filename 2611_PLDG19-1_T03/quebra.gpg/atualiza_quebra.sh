@@ -3,7 +3,7 @@
 # Script Name  : atualiza_quebra.sh
 # Autor        : DBA Sobrinho
 # Data         : 17/11/2026
-# Versao       : 1.3
+# Versao       : 1.4
 # Descricao    : Tenta baixar do GitHub a versao mais nova do robo de quebras (menu + quebra_*.sh.gpg).
 #                Baixa numa pasta temporaria, valida (sintaxe do menu e decifra cada .gpg) e so entao
 #                troca a pasta QUEBRA. Se nao houver internet ou algo falhar, mantem a versao local.
@@ -52,7 +52,12 @@ if baixa "$API" "$TMP/lista.json"; then
   LISTA="$(grep -o '"name": *"[^"]*"' "$TMP/lista.json" | sed 's/.*"name": *"//;s/"$//' | grep -E '^(\.quebra_menu\.sh|quebra_[0-9]{3}_.*\.sh\.gpg)$')"
 fi
 if [ -z "$LISTA" ]; then
-  LISTA=".quebra_menu.sh $(for n in $(seq -w 1 20); do printf 'quebra_0%s_PRIM_STBY.sh.gpg ' "$n"; done)"
+  # sem API: so tenta os nomes conhecidos se o GitHub responder (evita 90 timeouts sem internet)
+  if ! baixa "$RAW/.quebra_menu.sh" "$TMP/teste_menu"; then
+    msg "sem acesso ao GitHub: usando a versao local ($(ls "$DIR"/quebra_*.sh.gpg 2>/dev/null | wc -l) quebras)"
+    exit 0
+  fi
+  LISTA=".quebra_menu.sh $(for n in $(seq -w 1 30); do for v in 1 2 3; do printf 'quebra_0%s_N%s.sh.gpg ' "$n" "$v"; done; done)"
   MODO="raw"
 else
   MODO="api"

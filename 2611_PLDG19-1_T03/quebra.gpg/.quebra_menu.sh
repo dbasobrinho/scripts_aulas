@@ -3,7 +3,7 @@
 # Script Name  : quebra_menu.sh
 # Autor        : DBA Sobrinho
 # Data         : 17/11/2026
-# Versao       : 3.1
+# Versao       : 4.0
 # Descricao    : Menu do robo gerador de problemas do PowerLab Data Guard.
 #                -> lista os quebra_*.sh.gpg, mostra a ultima execucao de cada um (pelos logs)
 #                -> descriptografa em memoria e executa com bash (nao grava o .sh no disco)
@@ -39,14 +39,31 @@ EOSQL
   echo "${r:-nao foi possivel consultar}"
 }
 
-ultima_exec() {   # $1 = nome do .gpg ; imprime "data  status"
-  local f st
+ultima_exec() {   # $1 = nome do .gpg ; imprime o status (15 colunas visiveis)
+  local f
   f="$(ls -1t "$LOGDIR/${1%.*}"_*.log 2>/dev/null | head -1)"
   [ -z "$f" ] && { printf "%s" "${C_CZ}nunca executado${C_0}"; return; }
-  if grep -q "\[NOK\]" "$f"; then st="${C_AM}! nada quebrado${C_0}"
-  elif grep -q "\[OK\] ALGO FOI QUEBRADO" "$f"; then st="${C_VD}+ quebrado${C_0}"
-  else st="${C_VM}x erro${C_0}"; fi
-  printf "%s  %s" "$(date -r "$f" '+%d/%m %H:%M')" "$st"
+  if grep -q "\[NOK\]" "$f"; then printf "%s! %s%s" "$C_AM" "$(date -r "$f" '+%d/%m %H:%M')  " "$C_0"
+  elif grep -q "\[OK\] ALGO FOI QUEBRADO" "$f"; then printf "%s✔ %s%s" "$C_VD" "$(date -r "$f" '+%d/%m %H:%M')  " "$C_0"
+  else printf "%s✖ %s%s" "$C_VM" "$(date -r "$f" '+%d/%m %H:%M')  " "$C_0"; fi
+}
+
+estrelas() {      # $1 = nome do .gpg (quebra_NNN_N2.sh.gpg) ; imprime ★★☆
+  local n=0
+  [[ "$1" =~ _N([1-3])\. ]] && n="${BASH_REMATCH[1]}"
+  case "$n" in
+    1) printf "%s★%s☆☆%s" "$C_VD" "$C_CZ" "$C_0";;
+    2) printf "%s★★%s☆%s" "$C_AM" "$C_CZ" "$C_0";;
+    3) printf "%s★★★%s" "$C_VM" "$C_0";;
+    *) printf "%s???%s" "$C_CZ" "$C_0";;
+  esac
+}
+
+celula() {        # $1 = id ; $2 = arquivo -> uma celula da grade (38 colunas visiveis)
+  local base num="???"
+  base="$(basename "$2")"
+  [[ "$base" =~ ([0-9]{3}) ]] && num="${BASH_REMATCH[1]}"
+  printf "%s%-3s%s %s  Problema %s  %s" "$C_LAR" "$1" "$C_0" "$(estrelas "$base")" "$num" "$(ultima_exec "$base")"
 }
 
 QUEBRA() {
@@ -63,15 +80,18 @@ QUEBRA() {
   echo "${C_LAR}${LINHA}${C_0}"
   printf "   %sServidor:%s %-10s %sInstancia:%s %-8s %sBanco:%s %s\n" "$C_AZ" "$C_0" "$(hostname -s)" "$C_AZ" "$C_0" "${ORACLE_SID:-?}" "$C_AZ" "$C_0" "$(info_banco)"
   echo "${C_CZ}${TRACO}${C_0}"
-  printf "   ${C_B}%-4s %-14s %-32s %s${C_0}\n" "ID" "Problema" "Arquivo" "Ultima execucao"
-  echo "${C_CZ}${TRACO}${C_0}"
-  local i=0 f base num
-  for f in "${FILES[@]}"; do
-    ((i++)); base=$(basename "$f"); num="???"
-    [[ "$base" =~ ([0-9]{3}) ]] && num="${BASH_REMATCH[1]}"
-    printf "   ${C_LAR}%-4s${C_0} %-14s ${C_CZ}%-32s${C_0} %s\n" "$i" "Problema $num" "$base" "$(ultima_exec "$base")"
+  local total=${#FILES[@]} metade i j
+  metade=$(( (total + 1) / 2 ))
+  for (( i = 1; i <= metade; i++ )); do
+    j=$(( i + metade ))
+    if (( j <= total )); then
+      printf "   %s   %s|%s  %s\n" "$(celula "$i" "${FILES[i-1]}")" "$C_CZ" "$C_0" "$(celula "$j" "${FILES[j-1]}")"
+    else
+      printf "   %s\n" "$(celula "$i" "${FILES[i-1]}")"
+    fi
   done
   echo "${C_CZ}${TRACO}${C_0}"
+  echo "   ${C_VD}★${C_CZ}☆☆${C_0} facil   ${C_AM}★★${C_CZ}☆${C_0} medio   ${C_VM}★★★${C_0} dificil      ${C_VD}✔${C_0} quebrou   ${C_AM}!${C_0} nada quebrado   ${C_VM}✖${C_0} erro"
   echo "   Digite o ${C_B}ID${C_0} do problema  |  ${C_B}q${C_0} = sair"
   echo "${C_LAR}${LINHA}${C_0}"
   echo
