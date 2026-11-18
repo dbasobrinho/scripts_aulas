@@ -3,7 +3,7 @@
 # Script Name  : atualiza_quebra.sh
 # Autor        : DBA Sobrinho
 # Data         : 17/11/2026
-# Versao       : 1.2
+# Versao       : 1.3
 # Descricao    : Tenta baixar do GitHub a versao mais nova do robo de quebras (menu + quebra_*.sh.gpg).
 #                Baixa numa pasta temporaria, valida (sintaxe do menu e decifra cada .gpg) e so entao
 #                troca a pasta QUEBRA. Se nao houver internet ou algo falhar, mantem a versao local.
@@ -15,15 +15,23 @@ REPO="${QUEBRA_REPO:-dbasobrinho/scripts_aulas}"
 BRANCH="${QUEBRA_BRANCH:-main}"
 CAMINHO="${QUEBRA_CAMINHO:-2611_PLDG19-1_T03/quebra.gpg}"
 DIR="${QUEBRA_DIR:-/home/oracle/ADMDBA/PLDG/QUEBRA}"
-API="https://api.github.com/repos/${REPO}/contents/${CAMINHO}?ref=${BRANCH}"
-RAW="https://raw.githubusercontent.com/${REPO}/${BRANCH}/${CAMINHO}"
-SELF="$(readlink -f "$0")"
-SELF_URL="${QUEBRA_SELF_URL:-$RAW/atualiza_quebra.sh}"
 TMP="$(mktemp -d /tmp/quebra_upd.XXXXXX)"
 trap 'rm -rf "$TMP"' EXIT
 
 msg() { echo "[robo] $*"; }
 baixa() { wget -q -T 10 -t 1 -O "$2" "$1" 2>/dev/null && [ -s "$2" ]; }
+
+# o raw do GitHub pela branch fica ate 5 min em cache depois de um commit;
+# pelo SHA do ultimo commit da pasta o conteudo e sempre o mais novo
+REF="$BRANCH"
+if baixa "https://api.github.com/repos/${REPO}/commits?path=${CAMINHO}&sha=${BRANCH}&per_page=1" "$TMP/commit.json"; then
+  SHA="$(grep -o '"sha": *"[0-9a-f]\{40\}"' "$TMP/commit.json" | head -1 | grep -o '[0-9a-f]\{40\}')"
+  [ -n "$SHA" ] && REF="$SHA"
+fi
+API="https://api.github.com/repos/${REPO}/contents/${CAMINHO}?ref=${REF}"
+RAW="https://raw.githubusercontent.com/${REPO}/${REF}/${CAMINHO}"
+SELF="$(readlink -f "$0")"
+SELF_URL="${QUEBRA_SELF_URL:-$RAW/atualiza_quebra.sh}"
 
 # 0) auto-atualizacao: so uma vez por chamada (ATUALIZA_QUEBRA_REEXEC evita loop)
 if [ -z "${ATUALIZA_QUEBRA_REEXEC:-}" ] && [ -f "$SELF" ] && [ -w "$(dirname "$SELF")" ]; then
