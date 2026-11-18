@@ -3,7 +3,7 @@
 # Script Name  : menu_root.sh
 # Autor        : DBA Sobrinho
 # Data         : 17/11/2026
-# Versao       : 1.1
+# Versao       : 1.2
 # Descricao    : Menu (root) dos scripts de recomposicao do lab PowerLab Data Guard.
 #                Mostra a ordem certa, onde cada script roda e se pode rodar NESTA maquina;
 #                bloqueia execucao no servidor errado, pede confirmacao e grava log de cada execucao.
@@ -19,7 +19,7 @@ CAT=(
 "05_srvora3_srvora4_AJUSTA_LISTENER_GRID_PARA_DG.sh|ambos|2|listener.ora do Grid com as entradas estaticas do DG"
 "06_srvora3_srvora4_AJUSTA_TNANAMES_ORACLE_PARA_DG.sh|ambos|3|tnsnames.ora com os aliases do DG"
 "08_srvora3_srvora4_AJUSTA_ORAPW_PARA_DG.sh|ambos|4|Arquivo de senha (orapw) igual nos dois servidores"
-"07_srvora4_AUTOBR_DG_PARAMS_E_ARCHIVE_FLASHBACK_total.sh|srvora4|5|Primario: parametros DG, ARCHIVELOG, FLASHBACK, FORCE LOGGING, SRL"
+"07_srvora4_AUTOBR_DG_PARAMS_E_ARCHIVE_FLASHBACK_total.sh|srvora4|5|Primario: DG, ARCHIVELOG, FLASHBACK, FORCE LOGGING e SRL"
 "04_srvora3_AUTOUS_DROP_DATABASE_EXEC_DUPLICATE_INICIA_DR.sh|srvora3|6|Recria o standby: DROP + DUPLICATE + MRP"
 "03_srvora3_AUTOUS_DROP_DATABASE.sh|srvora3|opc|So apaga o standby AUTOUS (o passo 6 ja faz isso)"
 "00.srvora4_AUTOBR_DOWNLOAD_BKP_AUTOBR_GITHUB.sh|srvora4|opc|Baixa o backup do GitHub (a imagem ja traz em bkp_AUTOBR)"
@@ -66,15 +66,15 @@ mostra_menu() {
   printf "   %sServidor:%s %-9s %sBanco:%s %s\n" "$C_AZ" "$C_0" "$HOST" "$C_AZ" "$C_0" "$(info_banco)"
   echo "   ${C_AZ}Ordem:${C_0} passo 1 (srvora4) > passos 2, 3 e 4 (nos dois) > passo 5 (srvora4) > passo 6 (srvora3)"
   echo "${C_CZ}${TRACO}${C_0}"
-  printf "   ${C_B}%-3s %-9s %-66s %-8s %-15s %s${C_0}\n" "ID" "Passo" "O que faz" "Onde" "Aqui" "Ultima vez"
+  printf "   ${C_B}%-3s %-9s %-66s %-8s %-18s %s${C_0}\n" "ID" "Passo" "O que faz" "Onde" "Aqui" "Ultima vez"
   echo "${C_CZ}${TRACO}${C_0}"
   local i=0 e arq onde passo desc aqui p
   for e in "${CAT[@]}"; do
     ((i++)); IFS='|' read -r arq onde passo desc <<< "$e"
     case "$passo" in opc) p="opcional";; instr) p="instrutor";; *) p="  $passo";; esac
-    if [ ! -f "$SCR_DIR/$arq" ]; then aqui="${C_VM}✖ sem arquivo  ${C_0}"
-    elif pode_aqui "$onde"; then aqui="${C_VD}✔ pode rodar   ${C_0}"
-    else aqui="${C_CZ}✖ outro servidor${C_0}"; fi
+    if [ ! -f "$SCR_DIR/$arq" ]; then aqui="${C_VM}✖ sem arquivo     ${C_0}"
+    elif pode_aqui "$onde"; then aqui="${C_VD}✔ pode rodar      ${C_0}"
+    else aqui="${C_CZ}✖ outro servidor  ${C_0}"; fi
     printf "   %s%-3s%s %-9s %-66s %-8s %s %s\n" "$C_LAR" "$i" "$C_0" "$p" "${desc:0:66}" "$onde" "$aqui" "$(ultima_exec "$arq")"
   done
   echo "${C_CZ}${TRACO}${C_0}"
