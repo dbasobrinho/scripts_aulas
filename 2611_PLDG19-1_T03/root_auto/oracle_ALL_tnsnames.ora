@@ -1,0 +1,37 @@
+##INICIO DO tnsnames
+
+##Datacenter BR – Primário
+AUTOBR_TNS =
+  (DESCRIPTION =
+        (ADDRESS = (PROTOCOL = TCP)(HOST = srvora4)(PORT = 1521))
+        (CONNECT_DATA =
+          (SERVER = DEDICATED)
+          (SERVICE_NAME = AUTOBR_SVC)
+        )
+  )
+
+##Datacenter US – Standby (DR)
+AUTOUS_TNS =
+  (DESCRIPTION =
+        (ADDRESS = (PROTOCOL = TCP)(HOST = srvora3)(PORT = 1521))
+        (CONNECT_DATA =
+          (SERVER = DEDICATED)
+          (SERVICE_NAME = AUTOUS_SVC)
+        )
+  )
+
+
+AUTOBR_DGMGRL =
+  (DESCRIPTION=
+    (ADDRESS=(PROTOCOL=TCP)(HOST=srvora4)(PORT=1521))
+    (CONNECT_DATA=(SERVICE_NAME=AUTOBR_DGMGRL)(SERVER=DEDICATED))
+  )
+
+AUTOUS_DGMGRL =
+  (DESCRIPTION=
+    (ADDRESS=(PROTOCOL=TCP)(HOST=srvora3)(PORT=1521))
+    (CONNECT_DATA=(SERVICE_NAME=AUTOUS_DGMGRL)(SERVER=DEDICATED))
+  )
+
+
+## FIM DO tnsnames.ora

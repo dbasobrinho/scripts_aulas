@@ -1,0 +1,21 @@
+#Backup file is  /u01/app/grid/crsdata/srvora4/output/listener.ora.bak.srvora4.grid line added by Agent
+LISTENER=(DESCRIPTION=(ADDRESS_LIST=(ADDRESS=(PROTOCOL=IPC)(KEY=LISTENER))))            # line added by Agent
+ENABLE_GLOBAL_DYNAMIC_ENDPOINT_LISTENER=ON              # line added by Agent
+VALID_NODE_CHECKING_REGISTRATION_LISTENER=ON            # line added by Agent
+
+
+
+## (AUTOBR@srvora4)
+SID_LIST_LISTENER =
+  (SID_LIST =
+    (SID_DESC =
+      (GLOBAL_DBNAME = AUTOBR_SVC)
+      (ORACLE_HOME  = /u01/app/oracle/product/19.0.0/db_1)
+      (SID_NAME     = AUTOBR)
+    )
+    (SID_DESC =
+      (GLOBAL_DBNAME = AUTOBR_DGMGRL)
+      (ORACLE_HOME  = /u01/app/oracle/product/19.0.0/db_1)
+      (SID_NAME     = AUTOBR)
+    )
+  )
