@@ -3,7 +3,7 @@
 # Script Name  : menu_root.sh
 # Autor        : DBA Sobrinho
 # Data         : 17/11/2026
-# Versao       : 1.2
+# Versao       : 1.3
 # Descricao    : Menu (root) dos scripts de recomposicao do lab PowerLab Data Guard.
 #                Mostra a ordem certa, onde cada script roda e se pode rodar NESTA maquina;
 #                bloqueia execucao no servidor errado, pede confirmacao e grava log de cada execucao.
@@ -149,6 +149,8 @@ executa() {   # $1 = indice (1..N)
   echo "${C_CZ}${TRACO}${C_0}"
   ( cd "$SCR_DIR" && bash "./$arq" ) 2>&1 | tee -a "$logf"
   rc=${PIPESTATUS[0]}
+  # script que imprime [ERRO] mas sai com 0 conta como erro
+  (( rc == 0 )) && grep -q "\[ERRO\]" "$logf" && rc=1
   echo "== RC=$rc" >> "$logf"
   echo "${C_CZ}${TRACO}${C_0}"
   if (( rc == 0 )); then echo "   ${C_VD}${C_B}Terminou OK.${C_0}  Log: $logf"

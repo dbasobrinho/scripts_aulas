@@ -4,7 +4,8 @@
 #  SCRIPT........: Recria primário AUTOBR (DROP + CLEAN ASM + RESTORE SPFILE/CONTROLFILE/DATABASE)
 #  AUTOR.........: Roberto Fernandes Sobrinho (DBA Sobrinho)
 #  DATA..........: 29/09/2025
-#  VERSÃO........: 1.4
+#  VERSÃO........: 1.5
+#  17/11/2026 v1.5: caminho do spfile lido com sed (o awk perdia o $2 dentro do sudo -i); sai com o codigo do RMAN.
 #  17/11/2026 v1.4: codigo real do RMAN (PIPESTATUS); RECOVER NOREDO (backup consistente, feito em MOUNT);
 #                   SPFILE restaurado no mesmo lugar que o Oracle Restart usa + init ponteiro alinhado.
 #
@@ -96,7 +97,7 @@ if [[ -z "$ORACLE_SID_DET" || -z "$ORACLE_HOME_DET" ]]; then
 fi
 say "ORACLE_SID=${ORACLE_SID_DET} | ORACLE_HOME=${ORACLE_HOME_DET}"
 # spfile registrado no Oracle Restart (lido ANTES do DROP DATABASE, que apaga o spfile em uso)
-SPF_CRS="$(as_oracle "srvctl config database -db ${DB_UNIQUE_DIR} 2>/dev/null | awk -F': ' '/^Spfile/{print \$2}'")"
+SPF_CRS="$(as_oracle "srvctl config database -db ${DB_UNIQUE_DIR}" 2>/dev/null | sed -n 's/^Spfile:[[:space:]]*//p' | tr -d '[:space:]')"
 
 # ===================== PASSO 1: SHUTDOWN + DROP DATABASE =====================
 say "[PASSO 1] Shutdown e DROP DATABASE (se existir)..."
@@ -235,3 +236,4 @@ else
 fi
 
 say "Log de execução em: ${ABS_LOG}"
+exit ${RC_RMAN}
