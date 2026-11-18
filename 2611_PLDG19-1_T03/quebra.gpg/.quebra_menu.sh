@@ -3,7 +3,7 @@
 # Script Name  : quebra_menu.sh
 # Autor        : DBA Sobrinho
 # Data         : 17/11/2026
-# Versao       : 3.0
+# Versao       : 3.1
 # Descricao    : Menu do robo gerador de problemas do PowerLab Data Guard.
 #                -> lista os quebra_*.sh.gpg, mostra a ultima execucao de cada um (pelos logs)
 #                -> descriptografa em memoria e executa com bash (nao grava o .sh no disco)
@@ -28,13 +28,15 @@ TRACO="-------------------------------------------------------------------------
 
 info_banco() {
   local r
-  r="$(sqlplus -s -L "/ as sysdba" <<'EOSQL' 2>/dev/null | sed '/^[[:space:]]*$/d' | head -1
+  pgrep -f "ora_pmon_${ORACLE_SID:-x}\$" >/dev/null 2>&1 || { echo "instancia fora do ar"; return; }
+  r="$(sqlplus -s -L "/ as sysdba" <<'EOSQL' 2>/dev/null | sed '/^[[:space:]]*$/d'
 set heading off feedback off pagesize 0
-select database_role||' | '||open_mode from v$database;
+select 'PAPEL='||database_role||' | '||open_mode from v$database;
 exit
 EOSQL
 )"
-  case "$r" in *ORA-*|*ERROR*|"") echo "instancia fora do ar";; *) echo "$r";; esac
+  r="$(echo "$r" | grep '^PAPEL=' | head -1 | sed 's/^PAPEL=//')"
+  echo "${r:-nao foi possivel consultar}"
 }
 
 ultima_exec() {   # $1 = nome do .gpg ; imprime "data  status"
